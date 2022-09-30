@@ -16,11 +16,11 @@ def loginview(request):
     if request.method == 'POST':
         form = LoginForm(data=request.POST)
         if form.is_valid():
-            user = authenticate(username=form.cleaned_data['phone_number'], password=form.cleaned_data['password'])
+            user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
             if user is not None:
                 login(request, user)
                 return redirect('pages:home')
-            raise ValidationError('Wrong phone number or password !')
+            raise ValidationError('Wrong username or password !')
 
 
     return render(request, 'login.html', context={
@@ -50,19 +50,19 @@ def logout_view(request):
 
 
 
-# def user_registration(request):
-#     form = RegistrationForm()
+def user_registration(request):
+    form = RegistrationForm()
 
-#     if request.method == 'POST':
-#         form = RegistrationForm(data=request.POST)
-#         if form.is_valid():
-#             del form.cleaned_data['confirm_password']
-#             user = form.save(commit=False)
-#             user.set_password(user.password)
-#             user.save()
+    if request.method == 'POST':
+        form = RegistrationForm(data=request.POST)
+        if form.is_valid():
+            del form.cleaned_data['confirm_password']
+            user = form.save(commit=False)
+            user.set_password(user.password)
+            user.save()
 
-#             return redirect('user:login')
+            return redirect('user:login')
     
-#     return render(request, 'registration.html', context={
-#         'form': form
-#     })
+    return render(request, 'registration.html', context={
+        'form': form
+    })
