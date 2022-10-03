@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import BlogModel, CategoryModel, BlogTagModel
 
-@admin.register(BlogTagModel)
+@admin.register(BlogModel)
 class BlogModelAdmin(admin.ModelAdmin):
     list_display = ['title', 'category', 'tag', 'created_at']
     list_display_links = ['title']

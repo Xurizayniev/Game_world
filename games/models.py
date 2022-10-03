@@ -1,7 +1,8 @@
+from re import M
 from django.db import models
 from django.utils.translation import gettext_lazy as tr
-from ..users.models import CommentModel
 from ckeditor_uploader.fields import RichTextUploadingField
+from users.models import CommentModel
 
 
 class GameCategoryModel(models.Model):
@@ -48,6 +49,7 @@ class GameModel(models.Model):
     image_body = models.ImageField(upload_to='games/', verbose_name=tr('image body'))
     image_body2 = models.ImageField(upload_to='games/', verbose_name=tr('image body'))
     image_body3 = models.ImageField(upload_to='games/', verbose_name=tr('image body'))
+    video = models.FileField()
     company = models.ForeignKey(CompanyModel, on_delete=models.CASCADE, verbose_name=tr('company'))
     comment = models.ForeignKey(CommentModel, on_delete=models.SET_NULL, verbose_name=tr('comment'))
     category = models.ForeignKey(GameCategoryModel, on_delete=models.SET_NULL, verbose_name=tr('category'))
@@ -62,5 +64,3 @@ class GameModel(models.Model):
     class Meta:
         verbose_name = 'Game'
         verbose_name_plural = 'Games'
-
-

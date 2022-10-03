@@ -1,6 +1,6 @@
 from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
-from ..users.models import UserModel, CommentModel
+from users.models import UserModel, CommentModel
 from django.utils.translation import gettext_lazy as tr
 
 class CategoryModel(models.Model):
@@ -44,8 +44,6 @@ class BlogModel(WithVisitCounter, models.Model):
     tags = models.ManyToManyField(BlogTagModel, verbose_name=tr('tags'))
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=tr('created_at'))
         
-    
-
     def __str__(self):
         return self.title
 
