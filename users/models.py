@@ -1,12 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from games.models import GameModel
-from blog.models import BlogModel
 
 class UserModel(AbstractUser):
-    games = models.ManyToManyField(GameModel, related_name='games')
-    phone = models.CharField(max_length=13)
-    balance = models.DecimalField(max_digits=5, decimal_places=2)
+    games = models.ManyToManyField('games.GameModel', related_name='games')
 
     class Meta:
         verbose_name = 'User'
@@ -32,14 +28,17 @@ class WithVisitCounter(models.Model):
 
 
 class CommentModel(WithVisitCounter, models.Model):
-    user = models.ForeignKey(UserModel, on_delete=models.SET_NULL, related_name='user')
-    post = models.ManyToManyField(BlogModel, related_name='post')
+    post = models.ForeignKey('blog.BlogModel', related_name='comments')
+    user = models.ForeignKey(UserModel, on_delete=models.CASCADE, related_name='user')
+    name = models.CharField(max_length=80)
+    email = models.EmailField()
     body = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
     like = models.PositiveIntegerField()
     disslike = models.PositiveIntegerField()
 
     def __str__(self):
-        return self.body
+        return self.name
 
     class Meta:
         verbose_name = 'Comment'

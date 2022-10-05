@@ -1,6 +1,6 @@
 from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
-from users.models import UserModel, CommentModel
+from users.models import UserModel
 from django.utils.translation import gettext_lazy as tr
 
 class CategoryModel(models.Model):
@@ -38,9 +38,8 @@ class BlogModel(WithVisitCounter, models.Model):
     body = RichTextUploadingField()
     image = models.ImageField(upload_to='blog/', verbose_name=tr('image'))
     image_body = models.ImageField(upload_to='blog/', verbose_name=tr('image body'))
-    user = models.ForeignKey(UserModel, on_delete=models.SET_NULL, verbose_name=tr('user'))
-    comment = models.ForeignKey(CommentModel, on_delete=models.SET_NULL, verbose_name=tr('comment'))
-    category = models.ForeignKey(CategoryModel, on_delete=models.SET_NULL, verbose_name=tr('category'))
+    user = models.ForeignKey(UserModel, on_delete=models.SET_NULL, verbose_name=tr('user'), null=True)
+    category = models.ForeignKey(CategoryModel, on_delete=models.SET_NULL, verbose_name=tr('category'), null=True)
     tags = models.ManyToManyField(BlogTagModel, verbose_name=tr('tags'))
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=tr('created_at'))
         

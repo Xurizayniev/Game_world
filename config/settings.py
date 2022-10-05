@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'ckeditor',
     'crispy_forms',
 
-
     'users',
     'games',
     'blog',
@@ -178,4 +177,4 @@ INTERNAL_IPS = [
     # ...
 ]
 
-AUTH_USER_MODEL = 'users.Usermodel'
+AUTH_USER_MODEL = 'users.UserModel'

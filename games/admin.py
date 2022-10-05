@@ -1,19 +1,33 @@
 from django.contrib import admin
-from modeltranslation.admin import TranslationAdmin
+from .models import GameModel, PlatformModel, GameCategoryModel, CompanyModel
+
+@admin.register(GameModel)
+class GameModelAdmin(admin.ModelAdmin):
+    list_display = ['title', 'category', 'created_at']
+    list_display_links = ['title']
+    search_fields = ['title']
 
 
+@admin.register(PlatformModel)
+class PlatformModelAdmin(admin.ModelAdmin):
+    list_display = ['name', 'created_at']
+    list_display_links = ['name']
+    search_fields = ['name']
+    
 
+@admin.register(GameCategoryModel)
+class GameCategoryModelAdmin(admin.ModelAdmin):
+    list_display = ['name', 'created_at']
+    list_display_links = ['name']
+    search_fields = ['name']
+    
 
-
-
-
-
-
-
-
-
-
-
+@admin.register(CompanyModel)
+class CompanyModelAdmin(admin.ModelAdmin):
+    list_display = ['name', 'created_at']
+    list_display_links = ['name']
+    search_fields = ['name']
+    
 
 
 
@@ -31,4 +45,3 @@ class Media:
     css = {
         'screen': ('modeltranslation/css/tabbed_translation_fields.css',),
     }
-

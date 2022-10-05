@@ -5,7 +5,6 @@ from django.utils.translation import gettext_lazy as tr
 
 
 class LoginForm(forms.Form):
-    phone_number = forms.CharField(widget=forms.TextInput(), label=tr('phone number'))
     password = forms.CharField(widget=forms.PasswordInput(), label=tr('password'))
 
 class RegistrationForm(forms.ModelForm):
@@ -22,7 +21,7 @@ class RegistrationForm(forms.ModelForm):
 
     class Meta:
         model = UserModel
-        fields = ['username', 'phone_number', 'password', 'confirm_password']
+        fields = ['username', 'password', 'confirm_password']
 
 
 class CommentForm(forms.ModelForm):
