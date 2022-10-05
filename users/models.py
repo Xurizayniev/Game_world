@@ -28,7 +28,7 @@ class WithVisitCounter(models.Model):
 
 
 class CommentModel(WithVisitCounter, models.Model):
-    post = models.ForeignKey('blog.BlogModel', related_name='comments')
+    post = models.ForeignKey('blog.BlogModel', on_delete=models.CASCADE, related_name='comments')
     user = models.ForeignKey(UserModel, on_delete=models.CASCADE, related_name='user')
     name = models.CharField(max_length=80)
     email = models.EmailField()
