@@ -1,5 +1,7 @@
+from pyexpat import model
+from unicodedata import name
 from django import forms
-from .models import UserModel
+from .models import CommentModel, UserModel
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as tr
 
@@ -29,6 +31,6 @@ class RegistrationForm(forms.ModelForm):
 
 class CommentForm(forms.ModelForm):
 
-
     class Meta:
-        fields = ['body']
+        model = CommentModel
+        fields = [ 'name', 'email', 'body' ]

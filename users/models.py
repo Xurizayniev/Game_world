@@ -40,9 +40,11 @@ class CommentModel(WithVisitCounter, models.Model):
     like = models.PositiveIntegerField()
     disslike = models.PositiveIntegerField()
 
+    
+
     def __str__(self):
         return self.name
 
     class Meta:
         verbose_name = 'Comment'
-        verbose_name_plural = 'Commemts'
+        verbose_name_plural = 'Comments'

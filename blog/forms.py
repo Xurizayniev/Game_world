@@ -5,5 +5,13 @@ class CreateBlogForm(forms.ModelForm):
 
     class Meta:
         model = BlogModel
-        exclude = ['created_at', 'user']
+        fields = ['title', 'body', 'image', 'image_body', 'category', 'tags']
+        widget = {
+            'body': forms.Textarea(
+                attrs={
+                    'placeholder': "body"
+                }
+            )
+        }
+
 

@@ -1,6 +1,8 @@
 {% extends 'layouts/base.html' %}
 {% load static %}
 {% block content %}
+{% load static i18n %}
+{% load crispy_forms_tags %}
 
     <!--Page Banner Area Start-->
     <div class="page-banner-area" style="background-image: url(assets/images/bg/page-bg.jpg)">
@@ -30,18 +32,18 @@
                         <div class="col-12">
                             <div class="blog-details">
                                 <div class="blog-img">
-                                    <a href="single-blog.html"><img src="{{ object.image_body.url }}" alt=""></a>
+                                    <a href="single-blog.html"><img src="{{ post.image_body.url }}" alt=""></a>
                                     <div class="meta-box">
                                         <ul class="meta meta-border-bottom">
-                                            <li><a href="{% url 'blog:news' %}?author={{ object.author.username }}">{{ object.author.username }}</a></li> 
-                                            <li>{{ object.created_at|date:'d F Y' }}</li>
-                                            <li><a href="#">25 Comments</a></li>
+                                            <li><a href="{% url 'blog:news' %}?author={{ post.author.username }}">{{ post.author.username }}</a></li> 
+                                            <li>{{ post.created_at|date:'d F Y' }}</li>
+                                            <li><a href="#">{{ post.comments.values.count }} Comments</a></li>
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="blog-content">
-                                    <h3>{{ object.title|upper }}</h3>
-                                    <p>{{ object.body|safe }}</p>
+                                    <h3>{{ post.title|upper }}</h3>
+                                    <p>{{ post.body|safe }}</p>
                                     <div class="blog-tags">
                                         <h5>Tags:</h5> 
                                         {% for tags in object.tags.values %}
@@ -55,19 +57,21 @@
                     <div class="row">
                         <div class="blog-comment-wrap col">
                             <h4>Comments</h4>
+                            {{ comment }}
+                            {% for com in comment %}
                             <ul class="comment-list">
                                 <li>
                                     <div class="single-comment">
                                         <div class="image"><img src="assets/images/blog/comment-1.jpg" alt=""></div>
                                         <div class="content">
-                                            <h5>sannai smith</h5>
+                                            <h5>{{com.author}}</h5>
                                             <div class="review-date">
-                                                <span>30 Janurary, 2018</span>
+                                                <span>{{ com.created_at|date:'d F Y' }}</span>
                                                 <a href="#" class="reply">Reply</a>
                                             </div>
                                             <p>Ationally encounter consequences that are extremely painful. Nor again is there me anyone who loves or pursues or desires to obtain pain</p>
                                         </div>
-                                    </div>
+                                    </div>                                    
                                     <ul class="children">
                                         <li>
                                             <div class="single-comment">
@@ -98,21 +102,11 @@
                                     </div>
                                 </li>
                             </ul>
+                            {% endfor %}
                             <h4>Leave a reply</h4>
-                            <form action="#" class="comment-form">
-                                <div class="row">
-                                    <div class="col-md-6 col-12 mb-30">  
-                                        <input type="text" name="name" placeholder="Name">
-                                    </div>
-
-                                    <div class="col-md-6 col-12 mb-30">   
-                                        <input type="email" name="email" placeholder="Email">
-                                    </div>
-
-                                    <div class="col-12 mb-30">   
-                                        <textarea name="message" placeholder="Message"></textarea>
-                                    </div>
-
+                            <form action=""  method="post" class="comment-form">
+                                {% csrf_token %}
+                                {{ form|crispy }}
                                     <div class="col-12">
                                         <input type="submit" value="send now">
                                     </div>

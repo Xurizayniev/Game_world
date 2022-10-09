@@ -16,6 +16,8 @@ def loginview(request):
             if user is not None:
                 login(request, user)
                 return redirect('blog:news')
+            else:
+                form.add_error('password', 'Login or password incorrect')
                 
     return render(request, 'login.html', context={
         'form': form
