@@ -38,9 +38,9 @@ class BlogModel(WithVisitCounter, models.Model):
     body = RichTextUploadingField()
     image = models.ImageField(upload_to='blog/', verbose_name=tr('image'))
     image_body = models.ImageField(upload_to='blog/', verbose_name=tr('image body'))
-    user = models.ForeignKey(UserModel, on_delete=models.SET_NULL, verbose_name=tr('user'), null=True)
+    author = models.ForeignKey(UserModel, on_delete=models.SET_NULL, verbose_name=tr('user'), null=True, blank=True)
     category = models.ForeignKey(CategoryModel, on_delete=models.SET_NULL, verbose_name=tr('category'), null=True)
-    tags = models.ManyToManyField(BlogTagModel, verbose_name=tr('tags'))
+    tags = models.ManyToManyField(BlogTagModel, related_name='posts', verbose_name=tr('tags'))
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=tr('created_at'))
         
     def __str__(self):

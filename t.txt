@@ -1,0 +1,6 @@
+{% for post in object_list %}
+{{ post.body|safe|truncatewords:'20' }}
+{{ post.user.first_name }}
+{{ post.created_at|date:'d F Y' }}
+{% endfor %}
+{{ post.title|upper|truncatewords:'8' }}

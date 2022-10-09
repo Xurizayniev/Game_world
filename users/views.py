@@ -1,15 +1,11 @@
 from django.shortcuts import render, redirect
-from django.views.generic import TemplateView
+from django.urls import reverse
+from django.views.generic import *
+from .forms import *
+from django.contrib.auth import login, authenticate
 from django.core.exceptions import ValidationError
-from django.contrib.auth import login, logout, authenticate
-from .forms import LoginForm
-# Create your views here.
-
-class ContactView(TemplateView):
-    template_name = 'contact.html'
-
-class LoginView(TemplateView):
-    template_name = 'register.html'
+from .models import * 
+from django.http import HttpResponse
 
 def loginview(request):
     form = LoginForm()
@@ -19,35 +15,11 @@ def loginview(request):
             user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
             if user is not None:
                 login(request, user)
-                return redirect('pages:home')
-            raise ValidationError('Wrong username or password !')
-
-
+                return redirect('blog:news')
+                
     return render(request, 'login.html', context={
         'form': form
     })
-
-def logout_view(request):
-    logout(request)
-    return redirect('user:login')
-
-
-
-            
-
-
-def logout_view(request):
-    logout(request)
-    return redirect('user:login')
-
-
-
-
-
-
-
-
-
 
 
 def user_registration(request):
@@ -61,8 +33,9 @@ def user_registration(request):
             user.set_password(user.password)
             user.save()
 
-            return redirect('user:login')
+            return redirect('users:login')
     
-    return render(request, 'registration.html', context={
+    return render(request, 'register.html', context={
         'form': form
     })
+    

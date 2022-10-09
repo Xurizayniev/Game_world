@@ -1,8 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.utils.translation import gettext_lazy as tr
+
 
 class UserModel(AbstractUser):
-    games = models.ManyToManyField('games.GameModel', related_name='games')
+    games = models.ManyToManyField('games.GameModel', blank=True, null=True, related_name='games')
+    avatar = models.ImageField(upload_to='avatar/', null=True, blank=True, verbose_name=tr('avatar'))
 
     class Meta:
         verbose_name = 'User'
@@ -29,7 +32,7 @@ class WithVisitCounter(models.Model):
 
 class CommentModel(WithVisitCounter, models.Model):
     post = models.ForeignKey('blog.BlogModel', on_delete=models.CASCADE, related_name='comments')
-    user = models.ForeignKey(UserModel, on_delete=models.CASCADE, related_name='user')
+    author = models.ForeignKey(UserModel, on_delete=models.CASCADE, related_name='user')
     name = models.CharField(max_length=80)
     email = models.EmailField()
     body = models.TextField()

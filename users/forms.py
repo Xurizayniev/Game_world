@@ -5,7 +5,10 @@ from django.utils.translation import gettext_lazy as tr
 
 
 class LoginForm(forms.Form):
+    username = forms.CharField(widget=forms.TextInput(), label=tr('username'))
     password = forms.CharField(widget=forms.PasswordInput(), label=tr('password'))
+
+
 
 class RegistrationForm(forms.ModelForm):
     confirm_password = forms.CharField(widget=(

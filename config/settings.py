@@ -178,3 +178,4 @@ INTERNAL_IPS = [
 ]
 
 AUTH_USER_MODEL = 'users.UserModel'
+LOGOUT_REDIRECT_URL = "login/"
