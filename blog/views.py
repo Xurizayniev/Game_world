@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
 from django.shortcuts import get_object_or_404, render, redirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
 from .models import BlogModel
-# from .forms import CreateBlogForm
+from .forms import CreateBlogForm
 from users.models import CommentModel, UserModel
 from django.contrib.auth.decorators import login_required
 from users.forms import CommentForm
@@ -22,7 +22,6 @@ class BlogListView(ListView):
         cat = self.request.GET.get('category')
         if cat:
             qs = qs.filter(category=cat)
-            print('category', cat)
         author = self.request.GET.get('author')
         if author:
             qs = qs.filter(author__username=author)
@@ -34,17 +33,40 @@ class BlogDetailView(DetailView):
     model = BlogModel
     template_name = 'blog-detail.html'
 
+class BlogCreateView(CreateView):
+    template_name = 'blog-create.html'
+    form_class = CreateBlogForm
+
+    def form_valid(self, form):
+        instance = form.save(commit=False)
+        instance.author = self.request.user
+        instance.save()
+        form.save_m2m()
+        return redirect('blog:news')
+
 
 # def create_post(request):
-#     form = CreateBlogForm
-    
+#     form = CreateBlogForm()
 #     if request.method == 'POST':
 #         form = CreateBlogForm(data=request.POST, files=request.FILES)
 #         if form.is_valid():
-#             blog = form.save(commit=False)
-#             print(form.cleaned_data['tags'])
-#             blog.author = request.user
+#             print(form.cleaned_data)
+#             blog = BlogModel.objects.create(
+#                 title = form.cleaned_data.get('title'),
+#                 body = form.cleaned_data.get('body'),
+#                 image = form.cleaned_data.get('image'),
+#                 image_body = form.cleaned_data.get('image_body'),
+#                 author = request.user,
+#                 category = form.cleaned_data['category'],
+#                 tags = form.cleaned_data['tags']
+#             )
+#             print(f"{blog.title} {blog.author} {blog.tags} {blog.category}")
 #             blog.save()
+#             try:
+#                 BlogModel.objects.create(**form.cleaned_data)
+#             except:
+#                 form.add_error(None, 'error')
+
 #             return redirect('blog:news')
         
 #     return render(request, 'blog-create.html', context={

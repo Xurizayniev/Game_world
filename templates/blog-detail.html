@@ -1,7 +1,6 @@
 {% extends 'layouts/base.html' %}
 {% load static %}
 {% block content %}
-{% load static i18n %}
 {% load crispy_forms_tags %}
 
     <!--Page Banner Area Start-->
@@ -35,10 +34,10 @@
                                     <a href="single-blog.html"><img src="{{ post.image_body.url }}" alt=""></a>
                                     <div class="meta-box">
                                         <ul class="meta meta-border-bottom">
-                                            <li><a href="{% url 'blog:news' %}?author={{ post.author.username }}">{{ post.author.username }}</a></li> 
+                                            <li><a href="{% url 'blog:news' %}?author={{ post.author.username }}">{{ post.author.username }}</a></li>
+                                            <li><a href="{% url 'blog:news' %}?category={{ post.category.id }}">{{ post.category.name }}</a></li>
                                             <li>{{ post.created_at|date:'d F Y' }}</li>
                                             <li><a href="#">{{ post.comments.values.count }} Comments</a></li>
-                                            <li><a href="{% url 'blog:news' %}?category={{ post.category.id }}">{{ post.category.name }}</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -49,8 +48,8 @@
                                         <h5>Tags:</h5> 
                                         {% for tags in post.tags.values %}
                                         <a href="{% url 'blog:news' %}?tags={{ tags.id }}">#{{tags.name}}</a>
+                                        {% endfor %}
                                     </div>
-                                    {% endfor %}
                                 </div>
                             </div>
                         </div>
@@ -58,10 +57,10 @@
                     <div class="row">
                         <div class="blog-comment-wrap col">
                             <h4>Comments</h4>
-                            {% for com in comment %}
                             <ul class="comment-list">
                                 <li>
                                     <div class="single-comment">
+                                        {% for com in comment %}
                                         <div class="image"><img src="{{ com.author.avatar.url }}" alt=""></div>
                                         <div class="content">
                                             <h5>{{com.author.username}}</h5>
@@ -72,25 +71,26 @@
                                             <p>{{com.body}}</p>
                                         </div>
                                     </div>
-                                </li>
+                                            {%endfor%}
                             </ul>
-                            {% endfor %}
                             <h4>Leave a reply</h4>
-                            <form action=""  method="post" class="comment-form">
-                                {% csrf_token %}
-                                {{ form|crispy }}
+
+                            <form action="#" method="post" class="comment-form">
+                                <div class="row">
+                                    {% csrf_token %}
+                                    {{ form|crispy }}
                                     <div class="col-12">
                                         <input type="submit" value="send now">
                                     </div>
-
                                 </div>
                             </form>
                         </div>
                     </div>
                 </div>
-              <!--Single Sidebar Widget Start-->
-              {% include 'layouts/sidebar.html' %}
-              <!--Single Sidebar Widget End-->
+                <!--Single Sidebar Widget Start-->
+                    {% include 'layouts/sidebar.html' %}
+                <!--Single Sidebar Widget End-->
+
             </div>
         </div>
     </div>
@@ -99,11 +99,24 @@
     <!--Projects section start-->
     <div class="newslatter-section newslatter-section-tow section pt-5 pt-lg-0 pt-sm-0 pt-xs-0 pb-xs-50">
         <div class="container">
-        <!--News Latter Area Start-->
-            {% include 'layouts/message.html' %}
-        <!--News Latter Area End-->
+           
+            <div class="row">
+               <div class="col-12">
+                   <!--News Latter Area Start-->
+                   <div class="news-latter-area newslatter-black">
+                       <div class="news-latter-box">
+                           <h3>SUBSCRIBE OUR NEWSLETTER, GET ALL <br> LATEST NEWS, UPDATE, VIDEOS AND OFFERS </h3>
+                           <form action="#">
+                               <input type="text" placeholder="Enter your email here">
+                           </form>
+                       </div>
+                   </div>
+                   <!--News Latter Area End-->
+               </div> 
+            </div>
+            
         </div>
         
     </div>
     <!--Projects section end-->
-{% endblock %}
+    {% endblock %}

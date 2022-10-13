@@ -9,6 +9,6 @@ urlpatterns = [
     path('login/', loginview, name='login'),
     path('', LogoutView.as_view(next_page=settings.LOGOUT_REDIRECT_URL), name='logout'),
     
-    path('register/', user_registration, name='registration'),
+    path('register/', user_registration, name='register'),
 
 ]

@@ -41,7 +41,7 @@
                                         <ul class="meta meta-border-bottom">
                                             <li><a href="{% url 'blog:news' %}?author={{ post.author.username }}">{{ post.author.username }}</a></li> 
                                             <li>{{ post.created_at|date:'d F Y' }} </li>
-                                            <li><a href="#">25 Comments</a></li>
+                                            <li><a href="#">{{ post.comments.values.count }} Comments</a></li>
                                             <li><a href="{% url 'blog:news' %}?category={{ post.category.name }}">{{ post.category.name }}</a></li>
                                         </ul>
                                     </div>
