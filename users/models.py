@@ -1,4 +1,3 @@
-from email.policy import default
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils.translation import gettext_lazy as tr
@@ -38,8 +37,6 @@ class CommentModel(WithVisitCounter, models.Model):
     email = models.EmailField()
     body = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
-    like = models.PositiveIntegerField(default=0)
-    disslike = models.PositiveIntegerField(default=0)
 
 
 
