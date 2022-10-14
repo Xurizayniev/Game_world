@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
+
+from games.models import GameModel
 from .models import BlogModel
 from .forms import CreateBlogForm
 from users.models import CommentModel, UserModel
@@ -27,12 +29,13 @@ class BlogListView(ListView):
             qs = qs.filter(author__username=author)
             print('Author')
         return qs
+
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        data['games'] = GameModel.objects.order_by('-pk')[:2]
+        data['blogs'] = BlogModel.objects.order_by('pk')[:4]
+        return data
         
-
-class BlogDetailView(DetailView):
-    model = BlogModel
-    template_name = 'blog-detail.html'
-
 class BlogCreateView(CreateView):
     template_name = 'blog-create.html'
     form_class = CreateBlogForm
@@ -77,6 +80,8 @@ class BlogCreateView(CreateView):
 
 def blogdetail(request, pk):
     post = get_object_or_404(BlogModel, id=pk)
+    games = GameModel.objects.order_by('-pk')[:2]
+    blogs = BlogModel.objects.order_by('-pk')[:4]
     comment = CommentModel.objects.filter(post=pk)
     if request.method == "POST":
         form = CommentForm(request.POST)
@@ -90,6 +95,13 @@ def blogdetail(request, pk):
     else:
         form = CommentForm()
     return render(request, "blog-detail.html",
-                  {"post": post,
+                {  "post": post,
                    "comment": comment,
-                   "form": form})
+                   "form": form,
+                   'games': games,
+                   'blogs': blogs
+                })
+
+
+
+

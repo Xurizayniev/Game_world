@@ -3,7 +3,7 @@ from .models import GameModel, PlatformModel, GameCategoryModel, CompanyModel, R
 
 @admin.register(GameModel)
 class GameModelAdmin(admin.ModelAdmin):
-    list_display = ['title', 'category', 'created_at']
+    list_display = ['title', 'category', 'created_at',]
     list_display_links = ['title']
     search_fields = ['title']
 

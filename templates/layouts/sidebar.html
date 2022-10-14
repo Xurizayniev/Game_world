@@ -1,3 +1,6 @@
+{% load static %}
+
+
 <div class="col-lg-4">
     <div class="sidebar-area mt-sm-60 mt-xs-50">
         <!--Single Sidebar Widget Start-->
@@ -5,14 +8,10 @@
             <h3>featured games</h3>
             <div class="single-featured-game mb-20">
                 <div class="game-img">
-                    <a href="#"><img src="assets/images/banner/sidebar-banner1.jpg" alt=""></a>
-                    <a class="game-title" href="#">the killer</a>
-                </div>
-            </div>
-            <div class="single-featured-game mb-20">
-                <div class="game-img">
-                    <a href="#"><img src="assets/images/banner/sidebar-banner2.jpg" alt=""></a>
-                    <a class="game-title" href="#">muscle cars</a>
+                    {% for game in games %}
+                    <a href="#"><img src="{{game.poster.url}}" alt=""></a>  
+                    <a class="game-title" href="{% url 'games:detail' game.pk %}">{{game.title}}</a>
+                    {% endfor %}
                 </div>
             </div>
         </div>
@@ -58,42 +57,17 @@
             <h3>recent post</h3>
             <div class="sidebar-rc-post">
                 <ul>
+                    {% for blog in blogs %}
                     <li>
                         <div class="rc-post-thumb">
-                            <a href="#"><img src="assets/images/rc-img/rc-img1.jpg" alt=""></a>
+                            <a href="#"><img src="{{blog.image.url}}" alt=""></a>
                         </div>
                         <div class="rc-post-content">
-                            <h3><a href="#">latest update of the new version</a></h3>
-                            <div class="widget-date">05 November, 2018</div>
+                            <h3><a href="#">{{blog.title|upper|truncatewords:'8'}}</a></h3>
+                            <div class="widget-date">{{ blog.created_at|date:'d F Y' }}</div>
                         </div>
                     </li>
-                    <li>
-                        <div class="rc-post-thumb">
-                            <a href="#"><img src="assets/images/rc-img/rc-img2.jpg" alt=""></a>
-                        </div>
-                        <div class="rc-post-content">
-                            <h3><a href="#">Crew in the earth get new season</a></h3>
-                            <div class="widget-date">08 November, 2018</div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="rc-post-thumb">
-                            <a href="#"><img src="assets/images/rc-img/rc-img3.jpg" alt=""></a>
-                        </div>
-                        <div class="rc-post-content">
-                            <h3><a href="#">secrect code for the Mortal Kombat 4</a></h3>
-                            <div class="widget-date">05 November, 2018</div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="rc-post-thumb">
-                            <a href="#"><img src="assets/images/rc-img/rc-img4.jpg" alt=""></a>
-                        </div>
-                        <div class="rc-post-content">
-                            <h3><a href="#">need for speed have new challenge</a></h3>
-                            <div class="widget-date">02 November, 2018</div>
-                        </div>
-                    </li>
+                    {% endfor %}
                 </ul>
             </div>
         </div>
@@ -110,12 +84,12 @@
             <h3>follow us</h3>
             <div class="sidebar-instagram">
                 <ul>
-                    <li><a href="#"><img src="assets/images/instagram/instagram1.jpg" alt=""></a></li>
-                    <li><a href="#"><img src="assets/images/instagram/instagram2.jpg" alt=""></a></li>
-                    <li><a href="#"><img src="assets/images/instagram/instagram3.jpg" alt=""></a></li>
-                    <li><a href="#"><img src="assets/images/instagram/instagram4.jpg" alt=""></a></li>
-                    <li><a href="#"><img src="assets/images/instagram/instagram5.jpg" alt=""></a></li>
-                    <li><a href="#"><img src="assets/images/instagram/instagram6.jpg" alt=""></a></li>
+                    <li><a href="#"><img src="{% static '/images/instagram/instagram1.jpg' %}" alt=""></a></li>
+                    <li><a href="#"><img src="{% static '/images/instagram/instagram2.jpg' %}" alt=""></a></li>
+                    <li><a href="#"><img src="{% static '/images/instagram/instagram3.jpg' %}" alt=""></a></li>
+                    <li><a href="#"><img src="{% static '/images/instagram/instagram4.jpg' %}" alt=""></a></li>
+                    <li><a href="#"><img src="{% static '/images/instagram/instagram5.jpg' %}" alt=""></a></li>
+                    <li><a href="#"><img src="{% static '/images/instagram/instagram6.jpg' %}" alt=""></a></li>
                 </ul>
             </div>
         </div>

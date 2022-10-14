@@ -64,7 +64,10 @@
                 <div class="col-12">
                     <div class="featured-slide">
                         <div class="single-featured img-full">
-                            <a href="#"><img src="{% static '' %}" alt=""></a>
+                            <h1>hello world</h1>
+                            {% for game in games %}
+                            <a href="{% url 'games:detail' game.pk %}"><img src="{{game.poster.url}}" alt=""></a>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>

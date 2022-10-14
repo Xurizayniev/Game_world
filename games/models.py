@@ -48,12 +48,16 @@ class GameModel(models.Model):
     image_body = models.ImageField(upload_to='games/', verbose_name=_('image body'))
     image_body2 = models.ImageField(upload_to='games/', verbose_name=_('image body'))
     image_body3 = models.ImageField(upload_to='games/', verbose_name=_('image body'))
+    image_body4 = models.ImageField(upload_to='games/', verbose_name=_('image body'))
     video = models.URLField()
     company = models.ForeignKey(CompanyModel, on_delete=models.CASCADE, verbose_name=_('company'))
     category = models.ForeignKey(GameCategoryModel, on_delete=models.SET_NULL, verbose_name=_('category'), null=True)
     platform = models.ManyToManyField(PlatformModel, verbose_name=_('platform'))
     price = models.DecimalField(max_digits=5, decimal_places=2)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('created_at'))
+
+    def get_platform(self):
+        return self.platform
 
     def __str__(self):
         return self.title
