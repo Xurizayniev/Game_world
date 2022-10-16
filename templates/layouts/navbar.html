@@ -35,8 +35,8 @@
                                         <li><a href="games-details.html">Games Details</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="video.html">Videos</a></li>
-                                <li><a href="forum.html">Forums</a>
+                                <li><a href="{% url 'games:trailer' %}">Videos</a></li>
+                                <li><a href="">Forums</a>
                                     <ul class="sub-menu">
                                         <li><a href="forum.html">News</a></li>
                                         {% if request.user.is_authenticated %}
