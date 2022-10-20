@@ -3,7 +3,7 @@
      <div class="toolbar-short-area d-md-flex align-items-center">
          <div class="toolbar-shorter">
             <h3>Platform</h3>
-             <select class="wide">
+             <select onchange="addUrlParameter('platform', this.value)" class="wide">
                  <option data-display="Select">Platform</option>
                  {% for platform in platforms %}
                  <option value="{{ platform.name }}">{{ platform.name }}</option>
@@ -12,7 +12,7 @@
          </div>
          <div class="toolbar-shorter">
             <h3>Category</h3>
-             <select class="wide">
+             <select onchange="addUrlParameter('cat', this.value)" class="wide">
                  <option data-display="Select">Category</option>
                  {% for category in categories %}
                  <option value="{{ category.name }}"><a href="{% url 'games:trailer' %}?category={{ category.id }}" >{{category.name}}</a></option>

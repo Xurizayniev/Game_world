@@ -32,6 +32,7 @@ class VideoListView(ListView):
     model = GameModel
     template_name = "video.html"
     context_object_name = 'games'
+    paginate_by = 2
 
     def get_queryset(self):
         qs = GameModel.objects.all().order_by('-id')
@@ -39,10 +40,14 @@ class VideoListView(ListView):
         search = self.request.GET.get('game_search')
         if search:
             qs = qs.filter(title__icontains=search)
-        cat = self.request.GET.get('category')
+        cat = self.request.GET.get('cat')
         if cat:
-            qs = qs.filter(category_id=cat)
+            qs = qs.filter(category__name=cat)
+        platform = self.request.GET.get('platform')
+        if platform:
+            qs = qs.filter(platform__name=platform)
         return qs
+
 
     def get_context_data(self, **kwargs):
         data = super(VideoListView, self).get_context_data(**kwargs)
