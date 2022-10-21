@@ -98,7 +98,7 @@
                             <a href="{% url 'games:detail' game.pk %}"><img src="{{ game.poster.url }}" alt=""></a>
                         </div>
                         <div class="game-content">
-                            <h4><a href="{% url 'games:detail'  game.pk %}">the elder scroll</a></h4>
+                            <h4><a href="{% url 'games:detail'  game.pk %}">{{ game.title }}</a></h4>
                             {% for platform in game.platform.values %}
                             <span>{{ platform.name}}</span>
                             {% endfor %}

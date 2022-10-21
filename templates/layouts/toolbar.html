@@ -22,16 +22,3 @@
      </div>
      <!--Toolbar Short Area End-->
 </div>
-
-<script>
-    function addUrlParameter(name, value){
-        let searchParameter = new URLSearchParams(window.location.search)
-        if(searchParameter.has(name) && searchParameter.get(name) == value){
-            searchParameter.delete(name)
-        }else {
-            searchParameter.set(name, value)
-        }
-
-        window.location.search = searchParameter.toString()
-    }
-</script>

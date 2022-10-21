@@ -1,0 +1,13 @@
+<div class="row">
+                <div class="col-12">
+                    <div class="blog-pagination text-center">
+                        <ul class="page-pagination">
+                            <li><a href="#"><i class="icofont-long-arrow-left"></i></a></li>
+                            {% for page in page_obj.paginator.page_range %}
+                                    <li><a class=" {% if page == page_obj.number %}paginat text-primary{% endif %}" href="?page={{ page }}">{{ page }}</a></li>
+                                    {% endfor %}
+                            <li><a href="#"><i class="icofont-long-arrow-right"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>

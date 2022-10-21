@@ -17,6 +17,45 @@ class HomePageView(TemplateView):
         data['video'] = BlogModel.objects.order_by('-pk')[:4]
         return data
 
+    def get_queryset(self):
+        qs = GameModel.objects.all().order_by('-id')
+        search = self.request.GET.get('game_search')
+        if search:
+            qs = qs.filter(title__icontains=search)
+        cat = self.request.GET.get('cat')
+        if cat:
+            qs = qs.filter(category__name=cat)
+        platform = self.request.GET.get('platform')
+        if platform:
+            qs = qs.filter(platform__name=platform)
+        return qs
+
+class GameListView(ListView):
+    model = GameModel
+    template_name = 'games.html'
+    context_object_name = 'games'
+    paginate_by = 4
+
+    def get_queryset(self):
+        qs = GameModel.objects.all().order_by('-id')
+        search = self.request.GET.get('game_search')
+        if search:
+            qs = qs.filter(title__icontains=search)
+        cat = self.request.GET.get('cat')
+        if cat:
+            qs = qs.filter(category__name=cat)
+        platform = self.request.GET.get('platform')
+        if platform:
+            qs = qs.filter(platform__name=platform)
+        return qs
+
+    def get_context_data(self, **kwargs):
+        data = super(GameListView, self).get_context_data(**kwargs)
+        data['categories'] = GameCategoryModel.objects.all()
+        data['platforms'] = PlatformModel.objects.all()
+        return data
+
+
 def GameDetail(request, pk):
     object = GameModel.objects.get(pk=pk)
     game = GameModel.objects.order_by('-pk')[:6]

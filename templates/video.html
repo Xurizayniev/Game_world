@@ -37,6 +37,7 @@
                         </form>
                     </div>
                 </div>
+                    <!--Toolbar Short Area Start-->
                     {% include 'layouts/toolbar.html' %}
                     <!--Game Toolbar End-->
                 </div>
@@ -59,19 +60,7 @@
                 </div>
                 {% endfor %}
             </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="blog-pagination text-center">
-                        <ul class="page-pagination">
-                            <li><a href="#"><i class="icofont-long-arrow-left"></i></a></li>
-                            {% for page in page_obj.paginator.page_range %}
-                                    <li><a class=" {% if page == page_obj.number %}paginat text-primary{% endif %}" href="?page={{ page }}">{{ page }}</a></li>
-                                    {% endfor %}
-                            <li><a href="#"><i class="icofont-long-arrow-right"></i></a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            {% include 'layouts/paginator.html' %}
         </div>
     </div>
     <!--Video Area End-->
@@ -79,18 +68,5 @@
 {% endblock %}
 
 {% block extra_js %}
-    <script>
-    function addUrlParameter(name, value){
-        let searchParemeter = new URLSearchParams(window.location.search)
-        if(searchParemeter.has(name) && searchParemeter.get(name) == value){
-            searchParemeter.delete(name)
-        }else {
-            searchParemeter.set(name, value)
-        }
-
-        window.location.search = searchParemeter.toString()
-    }
-    </script>
-
 
 {% endblock %}
