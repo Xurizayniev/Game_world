@@ -12,10 +12,10 @@
          </div>
          <div class="toolbar-shorter">
             <h3>Category</h3>
-             <select onchange="addUrlParameter('cat', this.value)" class="wide">
+             <select onchange="addUrlParameter('category', this.value)" class="wide">
                  <option data-display="Select">Category</option>
                  {% for category in categories %}
-                 <option value="{{ category.name }}"><a href="{% url 'games:trailer' %}?category={{ category.id }}" >{{category.name}}</a></option>
+                 <option value="{{ category.name }}">{{ category.name }}</option>
                  {% endfor %}
              </select>
          </div>

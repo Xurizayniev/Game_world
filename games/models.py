@@ -1,8 +1,8 @@
-from email.policy import default
 from django.db import models
+from django.db.models import Sum
 from django.utils.translation import gettext_lazy as _
 from ckeditor_uploader.fields import RichTextUploadingField
-
+from users.models import UserModel
 
 class GameCategoryModel(models.Model):
     name = models.CharField(max_length=20)
@@ -39,6 +39,14 @@ class PlatformModel(models.Model):
         verbose_name = 'Platform'
         verbose_name_plural = 'Platforms'
 
+DEFAULT_CHOICES = {
+    '5': 'Отлично',
+    '4': 'Хорошо',
+    '3': 'Нормально',
+    '2': 'Плохо',
+    '1': 'Ужасно',
+}
+
 
 
 class GameModel(models.Model):
@@ -53,47 +61,93 @@ class GameModel(models.Model):
     company = models.ForeignKey(CompanyModel, on_delete=models.CASCADE, verbose_name=_('company'))
     category = models.ForeignKey(GameCategoryModel, on_delete=models.SET_NULL, verbose_name=_('category'), null=True)
     platform = models.ManyToManyField(PlatformModel, verbose_name=_('platform'))
+    # average_rating = models.FloatField(verbose_name=_('Average rating'), default=0,)
     price = models.DecimalField(max_digits=5, decimal_places=2)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('created_at'))
 
     def get_platform(self):
         return self.platform
 
-    def __str__(self):
-        return self.title
 
-    class Meta:
-        verbose_name = 'Game'
-        verbose_name_plural = 'Games'
+    @staticmethod
+    def get_cart_info(request):
+        cart = request.session.get('cart', [])
+        if not cart:
+            return 0, 0.0
+        return len(cart), GameModel.objects.filter(id__in=cart).aggregate(Sum('price'))['price__sum']
 
-class RatingStarModel(models.Model):
-    """Звезда рейтинга"""
-    value = models.SmallIntegerField("Значение", default=0)
-
-    def __str__(self):
-        return f'{int(self.value)}'
-
-    class Meta:
-        verbose_name = "Star rating"
-        verbose_name_plural = "Stars rating"
-        ordering = ["-value"]
+    @staticmethod
+    def get_game(request):
+        cart = request.session.get('cart', [])
+        if not cart:
+            return None
+        return GameModel.objects.filter(id__in=cart)
 
 
-class RatingModel(models.Model):
-    """Рейтинг"""
-    ip = models.CharField("IP адрес", max_length=15)
-    title = models.CharField(max_length=50)
-    review = models.TextField()
-    star = models.ForeignKey(RatingStarModel, on_delete=models.CASCADE, verbose_name="star")
-    game = models.ForeignKey(GameModel, on_delete=models.CASCADE, verbose_name="game")
-    user = models.ForeignKey('users.UserModel', on_delete=models.CASCADE, verbose_name='user')
-    like = models.PositiveIntegerField(default=0, verbose_name=_('likes'))
-    disslike = models.PositiveIntegerField(default=0, verbose_name=_('disslike'))
+    @staticmethod
+    def get_cart_objects(request):
+        cart = request.session.get('cart', [])
+        if not cart:
+            return None
+        return len(cart), GameModel.objects.filter(id__in=cart)
 
-    def __str__(self):
-        return f"{self.star} - {self.game}"
 
-    class Meta:
-        verbose_name = "Rating"
-        verbose_name_plural = "Ratings"
-
+#     def get_averages(self, max_value=None):
+#         max_rating_value = 0
+#         game_maximums = {}
+#         game_averages = {}
+#         games = GameModel.objects.filter(counts_for_average=True, value__comment=self)
+#         # Высчитываем среднее значение каждого поста
+#         for game in games:
+#             game_average = None
+#             ratings = ReviewModel.objects.filter(comment=self, game=game, value__isnull=False).exclude(value='')
+#             game_max = game_maximums[game]
+#             for comment in ReviewModel:
+#                 if game_average is None:
+#                     game_average = float(comment.value)
+#                 else:
+#                     game_average += float(comment.value)
+#
+#             if game_average is not None:
+#                 game_average *= float(max_rating_value) / float(game_max)
+#                 game_averages[game] = (game_average / ratings.count())
+#
+#         total_average = 0
+#         for game, game_average in game_averages.posts():
+#             total_average += game_average
+#         if not len(game_averages):
+#             return (False, False)
+#         total_average /= len(game_averages)
+#
+#         return total_average, game_averages
+#
+#     def get_average_rating(self, max_value=None):
+#         total_average, game_averages = self.get_averages(max_value=max_value)
+#         return total_average
+#
+#     def get_post_averages(self, max_value=None):
+#         total_average, game_averages = self.get_averages(max_value=max_value)
+#         return game_averages
+#
+#
+#     def __str__(self):
+#         return self.title
+#
+#     class Meta:
+#         verbose_name = 'Game'
+#         verbose_name_plural = 'Games'
+#
+# class ReviewModel(models.Model):
+#     rating_choices = models.IntegerField(choices=DEFAULT_CHOICES)
+#     value = models.CharField(
+#         max_length=20,
+#         verbose_name=_('Value'),
+#         choices=rating_choices,
+#         blank=True, null=True
+#     )
+#     games = models.ForeignKey(GameModel, on_delete=models.CASCADE, related_name='review')  # делаем отношение "один ко многим", что бы в статье можно было оставлять несколько комментариев
+#     author = models.ForeignKey('users.UserModel', on_delete=models.CASCADE, related_name='us')
+#     name = models.CharField(max_length=80)
+#     title = models.CharField(max_length=50)
+#     body = models.TextField()
+#     created_at = models.DateTimeField(auto_now_add=True)

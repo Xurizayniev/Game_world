@@ -47,7 +47,7 @@
                                     <div class="blog-tags">
                                         <h5>Tags:</h5> 
                                         {% for tags in post.tags.values %}
-                                        <a href="{% url 'blog:news' %}?tags={{ tags.id }}">#{{tags.name}}</a>
+                                        <a href="{% url 'blog:news' %}?tags={{ tags.name }}">#{{tags.name}}</a>
                                         {% endfor %}
                                     </div>
                                 </div>
@@ -74,7 +74,7 @@
                                             {%endfor%}
                             </ul>
                             <h4>Leave a reply</h4>
-
+                                    {% if request.user.is_authenticated %}
                             <form action="#" method="post" class="comment-form">
                                 <div class="row">
                                     {% csrf_token %}
@@ -84,6 +84,9 @@
                                     </div>
                                 </div>
                             </form>
+                                    {% else %}
+                                        <a href="{% url 'users:register' %}">Please sign up before you add comment</a>
+                        {% endif %}
                         </div>
                     </div>
                 </div>

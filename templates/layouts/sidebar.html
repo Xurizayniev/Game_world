@@ -7,8 +7,8 @@
                             {% for game in games %}
                             <div class="single-featured-game mb-20">
                                 <div class="game-img">
-                                    <a href="#"><img src="{{ game.poster.url }}" alt=""></a>
-                                    <a class="game-title" href="#">{{ game.title }}</a>
+                                    <a href="{% url 'games:detail' game.pk %}"><img src="{{ game.poster.url }}" alt=""></a>
+                                    <a class="game-title" href="{% url 'games:detail' game.pk %}">{{ game.title }}</a>
                                 </div>
 
                             </div>
@@ -59,10 +59,10 @@
                                 <ul>
                                     <li>
                                         <div class="rc-post-thumb">
-                                            <a href="#"><img src="{{ blog.image.url }}" alt=""></a>
+                                            <a href="{% url 'blog:detail' blog.pk %}"><img src="{{ blog.image.url }}" alt=""></a>
                                         </div>
                                         <div class="rc-post-content">
-                                            <h3><a href="#">{{ blog.title }}</a></h3>
+                                            <h3><a href=" {% url 'blog:detail' blog.pk %}">{{ blog.title }}</a></h3>
                                             <div class="widget-date">{{ blog.created_at|date:'d F Y' }}</div>
                                         </div>
                                     </li>

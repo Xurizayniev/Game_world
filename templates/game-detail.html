@@ -1,5 +1,6 @@
 {% extends 'layouts/base.html' %}
 {% load static %}
+{% load my_tags %}
 {% block content %}
     <!--Page Banner Area Start-->
     <div class="page-banner-area" style="background-image: url(assets/images/bg/page-bg.jpg)">
@@ -67,7 +68,15 @@
                                <div class="single-timeline pb-30">
                                    <h4>PRICE AND DOWNLOAD</h4>
                                    <span class="game-price">{{object.price}}$</span>
-                                   <a href="checkout.html">CLICK HERE FOR DOWNLOAD</a>
+                                   {% if request.user.is_authenticated %}
+                                   <a href="{% url 'users:add' pk=object.pk %}?next={{ request.path }}">ADD TO CARD</a>
+                                       {% if object|is_cart:request %}
+                                           <a href="{% url 'users:add' pk=object.pk %}?next={{ request.path }}">REMOVE FROM CARD</a>
+                                           {% endif %}
+                                   {% else %}
+                                   <a href="{% url 'users:register' %}"></a>
+                                   {% endif %}
+
                                </div>
                            </div>
                        </div>

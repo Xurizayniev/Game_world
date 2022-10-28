@@ -1,5 +1,6 @@
 {% load static %}
 {% load i18n %}
+{% load my_tags %}
 
 <!--Header section start-->
     <header class="header header-static bg-black header-sticky">
@@ -22,30 +23,22 @@
                                 <li><a href="{% url 'games:list' %}">games</a>
                                 <ul class="sub-menu">
                                     {% for category in categories %}
-
                                     <li><a href="{% url 'games:list' %}?category={{ category.name }}">{{ category.name }}</a></li>
                                     {% endfor %}
-
                                 </ul>
                                 </li>
                                 <li><a href="{% url 'games:trailer' %}">Videos</a></li>
                                 <li><a href="">Forums</a>
                                     <ul class="sub-menu">
                                         <li><a href="forum.html">News</a></li>
-                                        {% if request.user.is_authenticated %}
-                                        <li><a href="{% url 'blog:create' %}">Blog Create</a></li>
-                                        {% endif %}
                                         <li><a href="forum-post.html">Forums Post</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="{% url 'blog:news' %}">News</a>
                                     <ul class="sub-menu">
-                                        {% if request.user.is_authenticated %}
-                                            <li><a href="{% url 'blog:create' %}">Blog Create</a></li>
-                                        {% endif %}
-                                        <li><a href="blog-left-sidebar.html">Blog Left Sidebar</a></li>
-                                        <li><a href="blog-right-sidebar.html">Blog Right Sidebar</a></li>
-                                        <li><a href="blog-list.html">Blog List</a></li>
+                                    {% for blog_category in blog_categories %}
+                                        <li><a href="{% url 'blog:news' %}?category={{ blog_category.name }}">{{ blog_category.name }}</a></li>
+                                    {% endfor %}
                                     </ul>
                                 </li>
                                 <li><a href="">Contact</a></li>
@@ -60,8 +53,10 @@
                         <div class="header-right-wrap">
                             <ul>
                                 {% if request.user.is_authenticated %}
-                                <li><a href="{% url 'users:logout' %}">LOGOUT</a></li>
-                                <li><a href="{% url 'users:login' %}"></a>PROFILE</li>
+                                    <li><a href="">PROFILE</a></li>
+                                    <li><a href="{% url 'blog:create' %}">BLOG CREATE</a></li>
+                                    <li><a href="{% url 'users:logout' %}">LOGOUT</a></li>
+
                                 {% else %}
                                 <li><a href="{% url 'users:login' %}">LOGIN</a></li>
                                 <li><a href="{% url 'users:register' %}">REGISTER</a></li>

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import GameModel, PlatformModel, GameCategoryModel, CompanyModel, RatingStarModel, RatingModel
+from .models import GameModel, PlatformModel, GameCategoryModel, CompanyModel
 
 @admin.register(GameModel)
 class GameModelAdmin(admin.ModelAdmin):
@@ -27,23 +27,6 @@ class CompanyModelAdmin(admin.ModelAdmin):
     list_display = ['name', 'created_at']
     list_display_links = ['name']
     search_fields = ['name']
-
-@admin.register(RatingModel)
-class RatingModelAdmin(admin.ModelAdmin):
-    list_display = ['game', 'review', 'title']
-    list_display_links = ['game', 'review']
-
-@admin.register(RatingStarModel)
-class RatingStarModelAdmin(admin.ModelAdmin):
-    list_display = ['value']
-    list_display_links = ['value']
-
-    
-
-
-
-
-
 
 
 

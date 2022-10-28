@@ -1,8 +1,6 @@
-from statistics import quantiles
-from unicodedata import category
 from django.shortcuts import render
 from .models import GameCategoryModel, GameModel, PlatformModel
-from blog.models import BlogModel, BlogTagModel
+from blog.models import BlogModel, BlogTagModel,  CategoryModel
 from django.views.generic import TemplateView, DetailView, ListView
 
 class HomePageView(TemplateView):
@@ -15,33 +13,23 @@ class HomePageView(TemplateView):
         #new
         data['game'] = GameModel.objects.order_by('-pk')[:10]
         data['video'] = BlogModel.objects.order_by('-pk')[:4]
+        data['categories'] = GameCategoryModel.objects.all()
+        data['platforms'] = PlatformModel.objects.all()
+        data['blog_categories'] = CategoryModel.objects.all()
         return data
-
-    def get_queryset(self):
-        qs = GameModel.objects.all().order_by('-id')
-        search = self.request.GET.get('game_search')
-        if search:
-            qs = qs.filter(title__icontains=search)
-        cat = self.request.GET.get('cat')
-        if cat:
-            qs = qs.filter(category__name=cat)
-        platform = self.request.GET.get('platform')
-        if platform:
-            qs = qs.filter(platform__name=platform)
-        return qs
 
 class GameListView(ListView):
     model = GameModel
     template_name = 'games.html'
     context_object_name = 'games'
-    paginate_by = 4
+    paginate_by = 2
 
     def get_queryset(self):
         qs = GameModel.objects.all().order_by('-id')
         search = self.request.GET.get('game_search')
         if search:
             qs = qs.filter(title__icontains=search)
-        cat = self.request.GET.get('cat')
+        cat = self.request.GET.get('category')
         if cat:
             qs = qs.filter(category__name=cat)
         platform = self.request.GET.get('platform')
@@ -53,18 +41,23 @@ class GameListView(ListView):
         data = super(GameListView, self).get_context_data(**kwargs)
         data['categories'] = GameCategoryModel.objects.all()
         data['platforms'] = PlatformModel.objects.all()
+        data['blog_categories'] = CategoryModel.objects.all()
         return data
 
 
 def GameDetail(request, pk):
+
     object = GameModel.objects.get(pk=pk)
     game = GameModel.objects.order_by('-pk')[:6]
     blogs = BlogModel.objects.order_by('-pk')[:4]
+    category = GameCategoryModel.objects.all()
+    blog_categories = CategoryModel.objects.all()
     return render(request, 'game-detail.html', context={
         'object': object,
         'games': game,
         'blogs': blogs,
-
+        'categories': category,
+        'blog_categories': blog_categories
     })
 
 class VideoListView(ListView):
@@ -75,11 +68,10 @@ class VideoListView(ListView):
 
     def get_queryset(self):
         qs = GameModel.objects.all().order_by('-id')
-
         search = self.request.GET.get('game_search')
         if search:
             qs = qs.filter(title__icontains=search)
-        cat = self.request.GET.get('cat')
+        cat = self.request.GET.get('category')
         if cat:
             qs = qs.filter(category__name=cat)
         platform = self.request.GET.get('platform')
@@ -87,9 +79,9 @@ class VideoListView(ListView):
             qs = qs.filter(platform__name=platform)
         return qs
 
-
     def get_context_data(self, **kwargs):
         data = super(VideoListView, self).get_context_data(**kwargs)
         data['categories'] = GameCategoryModel.objects.all()
         data['platforms'] = PlatformModel.objects.all()
+        data['blog_categories'] = CategoryModel.objects.all()
         return data

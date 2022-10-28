@@ -3,8 +3,8 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView
 
-from games.models import GameModel
-from .models import BlogModel
+from games.models import GameModel, GameCategoryModel
+from .models import BlogModel, CategoryModel
 from .forms import CreateBlogForm
 from users.models import CommentModel, UserModel
 from django.contrib.auth.decorators import login_required
@@ -19,21 +19,21 @@ class BlogListView(ListView):
         qs = BlogModel.objects.order_by('-id')
         tag = self.request.GET.get('tags')
         if tag:
-            qs = qs.filter(tags=tag)
-            print('tag', tag)
+            qs = qs.filter(tags__name=tag)
         cat = self.request.GET.get('category')
         if cat:
-            qs = qs.filter(category=cat)
+            qs = qs.filter(category__name=cat)
         author = self.request.GET.get('author')
         if author:
             qs = qs.filter(author__username=author)
-            print('Author')
         return qs
 
     def get_context_data(self, **kwargs):
         data = super().get_context_data(**kwargs)
         data['games'] = GameModel.objects.order_by('-pk')[:2]
         data['blogs'] = BlogModel.objects.order_by('pk')[:4]
+        data['categories'] = GameCategoryModel.objects.all()
+        data['blog_categories'] = CategoryModel.objects.all()
         return data
         
 class BlogCreateView(CreateView):
@@ -47,41 +47,19 @@ class BlogCreateView(CreateView):
         form.save_m2m()
         return redirect('blog:news')
 
-
-# def create_post(request):
-#     form = CreateBlogForm()
-#     if request.method == 'POST':
-#         form = CreateBlogForm(data=request.POST, files=request.FILES)
-#         if form.is_valid():
-#             print(form.cleaned_data)
-#             blog = BlogModel.objects.create(
-#                 title = form.cleaned_data.get('title'),
-#                 body = form.cleaned_data.get('body'),
-#                 image = form.cleaned_data.get('image'),
-#                 image_body = form.cleaned_data.get('image_body'),
-#                 author = request.user,
-#                 category = form.cleaned_data['category'],
-#                 tags = form.cleaned_data['tags']
-#             )
-#             print(f"{blog.title} {blog.author} {blog.tags} {blog.category}")
-#             blog.save()
-#             try:
-#                 BlogModel.objects.create(**form.cleaned_data)
-#             except:
-#                 form.add_error(None, 'error')
-
-#             return redirect('blog:news')
-        
-#     return render(request, 'blog-create.html', context={
-#         'form': form
-#     })
-
+    def get_context_data(self, **kwargs):
+        data = super().get_context_data(**kwargs)
+        data['categories'] = GameCategoryModel.objects.all()
+        data['blog_categories'] = CategoryModel.objects.all()
+        return data
 
 
 def blogdetail(request, pk):
     post = get_object_or_404(BlogModel, id=pk)
     games = GameModel.objects.order_by('-pk')[:2]
     blogs = BlogModel.objects.order_by('-pk')[:4]
+    category = GameCategoryModel.objects.all()
+    blog_categories = CategoryModel.objects.all()
     comment = CommentModel.objects.filter(post=pk)
     if request.method == "POST":
         form = CommentForm(request.POST)
@@ -99,9 +77,7 @@ def blogdetail(request, pk):
                    "comment": comment,
                    "form": form,
                    'games': games,
-                   'blogs': blogs
+                   'blogs': blogs,
+                   'categories': category,
+                   'blog_categories': blog_categories
                 })
-
-
-
-
