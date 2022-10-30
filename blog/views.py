@@ -34,6 +34,7 @@ class BlogListView(ListView):
         data['blogs'] = BlogModel.objects.order_by('pk')[:4]
         data['categories'] = GameCategoryModel.objects.all()
         data['blog_categories'] = CategoryModel.objects.all()
+        data['user'] = self.request.user
         return data
         
 class BlogCreateView(CreateView):
@@ -51,6 +52,7 @@ class BlogCreateView(CreateView):
         data = super().get_context_data(**kwargs)
         data['categories'] = GameCategoryModel.objects.all()
         data['blog_categories'] = CategoryModel.objects.all()
+        data['user'] = self.request.user
         return data
 
 
@@ -61,6 +63,7 @@ def blogdetail(request, pk):
     category = GameCategoryModel.objects.all()
     blog_categories = CategoryModel.objects.all()
     comment = CommentModel.objects.filter(post=pk)
+    user = request.user
     if request.method == "POST":
         form = CommentForm(request.POST)
         if form.is_valid():
@@ -79,5 +82,6 @@ def blogdetail(request, pk):
                    'games': games,
                    'blogs': blogs,
                    'categories': category,
-                   'blog_categories': blog_categories
+                   'blog_categories': blog_categories,
+                   'user': user
                 })

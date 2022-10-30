@@ -1,7 +1,7 @@
 {% extends 'layouts/base.html' %}
 {% load static %}
 {% block content %}
-{% load crispy_forms_tags %}
+    {% load crispy_forms_tags %}
 
     <!--Page Banner Area Start-->
     <div class="page-banner-area" style="background-image: url(assets/images/bg/page-bg.jpg)">
@@ -21,7 +21,7 @@
         </div>
     </div>
     <!--Page Banner Area End-->
-    
+
     <!--Blog Area Start-->
     <div class="blog-details-area section pt-100 pt-lg-80 pt-md-70 pt-sm-60 pt-xs-50 pb-xs-50">
         <div class="container">
@@ -34,8 +34,12 @@
                                     <a href="single-blog.html"><img src="{{ post.image_body.url }}" alt=""></a>
                                     <div class="meta-box">
                                         <ul class="meta meta-border-bottom">
-                                            <li><a href="{% url 'blog:news' %}?author={{ post.author.username }}">{{ post.author.username }}</a></li>
-                                            <li><a href="{% url 'blog:news' %}?category={{ post.category.id }}">{{ post.category.name }}</a></li>
+                                            <li>
+                                                <a href="{% url 'blog:news' %}?author={{ post.author.username }}">{{ post.author.username }}</a>
+                                            </li>
+                                            <li>
+                                                <a href="{% url 'blog:news' %}?category={{ post.category.id }}">{{ post.category.name }}</a>
+                                            </li>
                                             <li>{{ post.created_at|date:'d F Y' }}</li>
                                             <li><a href="#">{{ post.comments.values.count }} Comments</a></li>
                                         </ul>
@@ -45,9 +49,9 @@
                                     <h3>{{ post.title|upper }}</h3>
                                     <p>{{ post.body|safe }}</p>
                                     <div class="blog-tags">
-                                        <h5>Tags:</h5> 
+                                        <h5>Tags:</h5>
                                         {% for tags in post.tags.values %}
-                                        <a href="{% url 'blog:news' %}?tags={{ tags.name }}">#{{tags.name}}</a>
+                                            <a href="{% url 'blog:news' %}?tags={{ tags.name }}">#{{ tags.name }}</a>
                                         {% endfor %}
                                     </div>
                                 </div>
@@ -61,65 +65,65 @@
                                 <li>
                                     <div class="single-comment">
                                         {% for com in comment %}
-                                        <div class="image"><img src="{{ com.author.avatar.url }}" alt=""></div>
-                                        <div class="content">
-                                            <h5>{{com.author.username}}</h5>
-                                            <div class="review-date">
-                                                <span>{{ com.created_at|date:'d F Y' }}</span>
-                                                <a href="#" class="reply">Reply</a>
+                                            <div class="image"><img src="{{ com.author.avatar.url }}" alt=""></div>
+                                            <div class="content">
+                                                <h5>{{ com.author.username }}</h5>
+                                                <div class="review-date">
+                                                    <span>{{ com.created_at|date:'d F Y' }}</span>
+                                                    <a href="#" class="reply">Reply</a>
+                                                </div>
+                                                <p>{{ com.body }}</p>
                                             </div>
-                                            <p>{{com.body}}</p>
-                                        </div>
-                                    </div>
-                                            {%endfor%}
+                                            </div>
+                                        {% endfor %}
                             </ul>
                             <h4>Leave a reply</h4>
-                                    {% if request.user.is_authenticated %}
-                            <form action="#" method="post" class="comment-form">
-                                <div class="row">
-                                    {% csrf_token %}
-                                    {{ form|crispy }}
-                                    <div class="col-12">
-                                        <input type="submit" value="send now">
+                            {% if request.user.is_authenticated %}
+                                <form action="#" method="post" class="comment-form">
+                                    <div class="row">
+                                        {% csrf_token %}
+                                        {{ form|crispy }}
+                                        <div class="col-12">
+                                            <input type="submit" value="send now">
+                                        </div>
                                     </div>
-                                </div>
-                            </form>
-                                    {% else %}
-                                        <a href="{% url 'users:register' %}">Please sign up before you add comment</a>
-                        {% endif %}
+                                </form>
+                            {% else %}
+                                <a href="{% url 'users:register' %}">Please sign up before you add comment</a>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
                 <!--Single Sidebar Widget Start-->
-                    {% include 'layouts/sidebar.html' %}
+                {% include 'layouts/sidebar.html' %}
                 <!--Single Sidebar Widget End-->
 
             </div>
         </div>
     </div>
     <!--Blog Area End-->
-    
+
     <!--Projects section start-->
     <div class="newslatter-section newslatter-section-tow section pt-5 pt-lg-0 pt-sm-0 pt-xs-0 pb-xs-50">
         <div class="container">
-           
+
             <div class="row">
-               <div class="col-12">
-                   <!--News Latter Area Start-->
-                   <div class="news-latter-area newslatter-black">
-                       <div class="news-latter-box">
-                           <h3>SUBSCRIBE OUR NEWSLETTER, GET ALL <br> LATEST NEWS, UPDATE, VIDEOS AND OFFERS </h3>
-                           <form action="#">
-                               <input type="text" placeholder="Enter your email here">
-                           </form>
-                       </div>
-                   </div>
-                   <!--News Latter Area End-->
-               </div> 
+                <div class="col-12">
+                    <!--News Latter Area Start-->
+                    <div class="news-latter-area newslatter-black">
+                        <div class="news-latter-box">
+                            <h3>SUBSCRIBE OUR NEWSLETTER, GET ALL <br> LATEST NEWS, UPDATE, VIDEOS AND OFFERS </h3>
+                            <form action="#">
+                                <input type="text" placeholder="Enter your email here">
+                            </form>
+                        </div>
+                    </div>
+                    <!--News Latter Area End-->
+                </div>
             </div>
-            
+
         </div>
-        
+
     </div>
     <!--Projects section end-->
-    {% endblock %}
+{% endblock %}

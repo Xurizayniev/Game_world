@@ -32,6 +32,7 @@ urlpatterns += i18n_patterns(
     path('blog/', include('blog.urls')),
     path('', include('games.urls')),
     path('users/', include('users.urls')),
+    path('order/', include('order.urls'))
 
 )
 

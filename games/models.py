@@ -89,7 +89,7 @@ class GameModel(models.Model):
         cart = request.session.get('cart', [])
         if not cart:
             return None
-        return len(cart), GameModel.objects.filter(id__in=cart)
+        return GameModel.objects.filter(id__in=cart)
 
 
 #     def get_averages(self, max_value=None):

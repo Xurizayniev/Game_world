@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'users',
     'games',
     'blog',
-
+    'order'
 ]
 
 MIDDLEWARE = [

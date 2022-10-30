@@ -9,6 +9,7 @@ from .models import *
 from games.models import GameCategoryModel, GameModel
 from blog.models import CategoryModel
 from django.http import HttpResponse
+import random
 
 def loginview(request):
     form = LoginForm()
@@ -27,7 +28,8 @@ def loginview(request):
     return render(request, 'login.html', context={
         'form': form,
         'categories': categories,
-        'blog_categories': blog_categories
+        'blog_categories': blog_categories,
+
     })
 
 
@@ -41,10 +43,11 @@ def user_registration(request):
         form = RegistrationForm(data=request.POST)
         if form.is_valid():
             del form.cleaned_data['confirm_password']
+            num = random.randrange(1000000000000000, 9999999999999999)
             user = form.save(commit=False)
             user.set_password(user.password)
+            user.card = CardModel.objects.create(number=num)
             user.save()
-
             return redirect('users:login')
     
     return render(request, 'register.html', context={
@@ -52,23 +55,3 @@ def user_registration(request):
         'categories': categories,
         'blog_categories': blog_category
     })
-
-@login_required
-def wishlist_View(request, pk):
-    product = get_object_or_404(GameModel, pk=pk)
-    WishlistModel.create_or_delete(request.user, product)
-    return redirect(request.GET.get('next', '/'))
-
-def add_game_view(request, pk):
-    cart = request.session.get('cart', [])
-
-    if pk in cart:
-        cart.remove(pk)
-    else:
-        cart.append(pk)
-
-    request.session['cart'] = cart
-    return redirect(request.GET.get('next', '/'))
-
-def checkout(request):
-    return render(request, 'checkout.html')

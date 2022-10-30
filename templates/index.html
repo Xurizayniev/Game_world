@@ -7,23 +7,23 @@
     <div class="hero-section section position-relative">
         <div class="hero-slider">
             <!--Hero Item start-->
-            <div class="hero-item hero-item-2" style="background-image: {% static 'images/hero/hero-2.jpg' %}">
+            {% for game in games %}
+            <div class="hero-item hero-item-2" style="background-image: {{game.image_body2.url}}">
                 <div class="container container-1520">
                     <div class="row">
                         <div class="col-12">
-
                             <!--Hero Content start-->
                             <div class="hero-content">
-                                <h1>THE WITCHER 3</h1>
+                                <h1>{{ game.title}}</h1>
                                 <h2>BETTLE BEGAN’S HERE</h2>
                                 <a class="df-btn" href="#">Buy now</a>
                             </div>
                             <!--Hero Content end-->
-
                         </div>
                     </div>
                 </div>
             </div>
+            {% endfor %}
             <!--Hero Item end-->
             <!--Hero Item start-->
             <div class="hero-item hero-item-2" style="background-image: url(assets/images/hero/hero-3.jpg)">
