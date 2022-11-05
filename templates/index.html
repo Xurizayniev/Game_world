@@ -1,5 +1,5 @@
 {% extends 'layouts/base.html' %}
-{% load static %}
+{% load static i18n %}
 {% block title %} home {% endblock %}
 {% block content %}
 
@@ -8,46 +8,27 @@
         <div class="hero-slider">
             <!--Hero Item start-->
             {% for game in games %}
-            <div class="hero-item hero-item-2" style="background-image: {{game.image_body2.url}}">
-                <div class="container container-1520">
-                    <div class="row">
-                        <div class="col-12">
-                            <!--Hero Content start-->
-                            <div class="hero-content">
-                                <h1>{{ game.title}}</h1>
-                                <h2>BETTLE BEGAN’S HERE</h2>
-                                <a class="df-btn" href="#">Buy now</a>
+                <div class="hero-item hero-item-2" style="background-image: {{ game.image_body2.url }}">
+                    <div class="container container-1520">
+                        <div class="row">
+                            <div class="col-12">
+                                <!--Hero Content start-->
+                                <div class="hero-content">
+                                    <h1>{{ game.title }}</h1>
+                                    <h2></h2>
+                                    <a class="df-btn" href="#">{% trans 'Buy now' %}</a>
+                                </div>
+                                <!--Hero Content end-->
                             </div>
-                            <!--Hero Content end-->
                         </div>
                     </div>
                 </div>
-            </div>
             {% endfor %}
-            <!--Hero Item end-->
-            <!--Hero Item start-->
-            <div class="hero-item hero-item-2" style="background-image: url(assets/images/hero/hero-3.jpg)">
-                <div class="container container-1520">
-                    <div class="row">
-                        <div class="col-12">
+            <!--Hero Content end-->
 
-                            <!--Hero Content start-->
-                            <div class="hero-content">
-                                <h1>THE WITCHER 3</h1>
-                                <h2>BETTLE BEGAN’S HERE</h2>
-                                <a class="df-btn" href="#">Buy now</a>
-                            </div>
-                            <!--Hero Content end-->
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--Hero Item end-->
         </div>
     </div>
-    <!--slider section end-->
-    
+
     <!--Featured section start-->
     <div class="featured-section section pb-95 pb-lg-75 pb-md-65 pb-sm-55 pb-xs-45">
         <div class="container-fluid p-0">
@@ -55,20 +36,19 @@
                 <div class="col-12">
                     <!--Featured Title Start-->
                     <div class="featured-title">
-                        <h2>FEATURED GAMES</h2>
-                        <a href="#">VIEW ALL GAMES</a>
+                        <h2>{% trans 'FEATURED GAMES' %}</h2>
+                        <a href="{% url 'games:list' %}">{% trans 'VIEW ALL GAMES' %}</a>
                     </div>
                     <!--Featured Title End-->
                 </div>
             </div>
             <div class="row no-gutters">
                 <div class="col-12">
-
                     <div class="featured-slide">
                         {% for game in games %}
-                        <div class="single-featured img-full">
-                            <a href="{% url 'games:detail' game.pk %}"><img src="{{ game.poster.url }}" alt=""></a>
-                        </div>
+                            <div class="single-featured img-full">
+                                <a href="{% url 'games:detail' game.pk %}"><img src="{{ game.poster.url }}" alt=""></a>
+                            </div>
                         {% endfor %}
                     </div>
                 </div>
@@ -76,7 +56,7 @@
         </div>
     </div>
     <!--Featured section end-->
-    
+
     <!--New Game Area Start-->
     <div class="new-game-area section pb-50 pb-lg-30 pb-md-20 pb-sm-10 pb-xs-0">
         <div class="container">
@@ -84,28 +64,28 @@
                 <div class="col-12">
                     <!--Section Title Start-->
                     <div class="section-title">
-                        <h2><span class="color-blue">new</span> games</h2>
+                        <h2><span class="color-blue">{% trans  "new" %}</span>{% trans "games" %}</h2>
                     </div>
                     <!--Section Title End-->
                 </div>
             </div>
             <div class="row game-slide">
                 {% for game in games %}
-                <div class="col-4">
-                    <!--Single Game Start-->
-                    <div class="single-game mb-50">
-                        <div class="game-img">
-                            <a href="{% url 'games:detail' game.pk %}"><img src="{{ game.poster.url }}" alt=""></a>
+                    <div class="col-4">
+                        <!--Single Game Start-->
+                        <div class="single-game mb-50">
+                            <div class="game-img">
+                                <a href="{% url 'games:detail' game.pk %}"><img src="{{ game.poster.url }}" alt=""></a>
+                            </div>
+                            <div class="game-content">
+                                <h4><a href="{% url 'games:detail'  game.pk %}">{{ game.title }}</a></h4>
+                                {% for platform in game.platform.values %}
+                                    <span>{{ platform.name }}</span>
+                                {% endfor %}
+                            </div>
                         </div>
-                        <div class="game-content">
-                            <h4><a href="{% url 'games:detail'  game.pk %}">{{ game.title }}</a></h4>
-                            {% for platform in game.platform.values %}
-                            <span>{{ platform.name}}</span>
-                            {% endfor %}
-                        </div>
+                        <!--Single Game End-->
                     </div>
-                    <!--Single Game End-->
-                </div>
                 {% endfor %}
             </div>
         </div>
@@ -118,15 +98,16 @@
                 <div class="col-12">
                     <div class="video-slider-active">
                         {% for game in games %}
-                        <div class="single-video">
-                            <div class="video-img video-img-2">
-                                <img src="{{ game.image_body4.url }}" alt="">
-                                <div class="video-content content-center">
-                                <h3>{{ game.title }}</h3>
-                                    <a class="video-popup" href="{{game.video}}"><i class="icofont-play-alt-2"></i> view demo</a>
+                            <div class="single-video">
+                                <div class="video-img video-img-2">
+                                    <img src="{{ game.image_body4.url }}" alt="">
+                                    <div class="video-content content-center">
+                                        <h3>{{ game.title }}</h3>
+                                        <a class="video-popup" href="{{ game.video }}"><i
+                                                class="icofont-play-alt-2"></i>{% trans "view demo" %}</a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         {% endfor %}
                     </div>
                 </div>
@@ -134,7 +115,7 @@
         </div>
     </div>
     <!--Video section start-->
-    
+
     <!--Games Review Section Start-->
     <div class="games-review-section section pb-105 pb-lg-85 pb-md-20 pb-sm-65 pb-xs-0">
         <div class="container">
@@ -144,7 +125,7 @@
                     <div class="section-title">
                         <h2><span class="color-blue">Games</span> review</h2>
                     </div>
-                    <!--Section Title End-->  
+                    <!--Section Title End-->
                 </div>
             </div>
             <div class="row">
@@ -157,7 +138,8 @@
                         <div class="review-content">
                             <h4><a href="games-details.html">the elder scroll</a></h4>
                             <span>rating: 9.9</span>
-                            <p>The Elder Scroll is the most popular are ames that your can Latest Mega 2019 games offer you ioous league and also alow you to make youe and smile</p>
+                            <p>The Elder Scroll is the most popular are ames that your can Latest Mega 2019 games offer
+                                you ioous league and also alow you to make youe and smile</p>
                         </div>
                     </div>
                     <!--Single Games Review End-->
@@ -171,7 +153,8 @@
                         <div class="review-content">
                             <h4><a href="games-details.html">the elder scroll</a></h4>
                             <span>rating: 9.9</span>
-                            <p>The Elder Scroll is the most popular are ames that your can Latest Mega 2019 games offer you ioous league and also alow you to make youe and smile</p>
+                            <p>The Elder Scroll is the most popular are ames that your can Latest Mega 2019 games offer
+                                you ioous league and also alow you to make youe and smile</p>
                         </div>
                     </div>
                     <!--Single Revent Games End-->
@@ -185,42 +168,45 @@
                         <div class="review-content">
                             <h4><a href="games-details.html">the elder scroll</a></h4>
                             <span>rating: 9.9</span>
-                            <p>The Elder Scroll is the most popular are ames that your can Latest Mega 2019 games offer you ioous league and also alow you to make youe and smile</p>
+                            <p>The Elder Scroll is the most popular are ames that your can Latest Mega 2019 games offer
+                                you ioous league and also alow you to make youe and smile</p>
                         </div>
                     </div>
                     <!--Single Games Review End-->
                 </div>
             </div>
-        </div>  
+        </div>
     </div>
     <!--Games Review Section Start-->
-    
+
     <!--Projects section start-->
     <div class="newslatter-section section pb-125 pb-lg-105 pb-md-70 pb-sm-85 pb-xs-50">
         <div class="container">
-           
+
             <div class="row">
-               <div class="col-12">
-                   <!--News Latter Area Start-->
-                   <div class="news-latter-area">
-                       <div class="news-latter-box">
-                           <h3>SUBSCRIBE OUR <span class="color-blue">NEWSLETTER</span> <br> GET ALL <span class="color-red">LATEST</span> NEWS, UPDATE, <br> <span class="color-blue">VIDEOS</span> AND OFFERS </h3>
-                           <form action="#">
-                               <input type="text" placeholder="Enter your email here">
-                           </form>
-                       </div>
-                       <div class="news-latter-banner-image">
-                           <img src="assets/images/news-latter/news-banner.png" alt="">
-                       </div>
-                   </div>
-                   <!--News Latter Area End-->
-               </div> 
+                <div class="col-12">
+                    <!--News Latter Area Start-->
+                    <div class="news-latter-area">
+                        <div class="news-latter-box">
+                            <h3>SUBSCRIBE OUR <span class="color-blue">NEWSLETTER</span> <br> GET ALL <span
+                                    class="color-red">LATEST</span> NEWS, UPDATE, <br> <span
+                                    class="color-blue">VIDEOS</span> AND OFFERS </h3>
+                            <form action="#">
+                                <input type="text" placeholder="Enter your email here">
+                            </form>
+                        </div>
+                        <div class="news-latter-banner-image">
+                            <img src="assets/images/news-latter/news-banner.png" alt="">
+                        </div>
+                    </div>
+                    <!--News Latter Area End-->
+                </div>
             </div>
-            
+
         </div>
-        
+
     </div>
     <!--Projects section end-->
-    
+
 
 {% endblock %}

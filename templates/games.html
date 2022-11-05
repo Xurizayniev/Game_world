@@ -1,27 +1,13 @@
 {% extends 'layouts/base.html' %}
-{% load static %}
+{% load static i18n %}
 {% block title %} List {% endblock %}
 {% block content %}
 
+
     <!--Page Banner Area Start-->
-    <div class="page-banner-area" style="background-image: url(assets/images/bg/page-bg.jpg)">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="page-content text-center">
-                        <h1>KINGS OF THE <br> WARRIORS</h1>
-                        <a class="df-btn" href="#">Buy now</a>
-                        <ul class="page-breadcrumb">
-                            <li><a href="index.html">Home</a></li>
-                            <li>Games</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    {% include 'layouts/banner.html' %}
     <!--Page Banner Area End-->
-    
+
     <!--Games Area Start-->
     <div class="games-area section pt-85 pt-lg-65 pt-md-55 pt-sm-55 pt-xs-45">
         <div class="container">
@@ -30,7 +16,7 @@
                     <!--Game Toolbar Start-->
                     <div class="game-topbar-wrapper d-md-flex justify-content-md-between align-items-center">
                         <div class="game-search-box">
-                            <h3>search games</h3>
+                            <h3>{% trans "search games" %}search games</h3>
                             <form action="{% url 'games:list' %}", method="GET">
                                 <input type="text" name="game_search" placeholder="Enter games name">
                                 <button type="submit"><i class="icofont-search-2"></i></button>
@@ -46,7 +32,6 @@
         <!--Single Game Start-->
             <div class="row">
                  {% for game in games %}
-
                 <div class="col-lg-4 col-md-6">
                     <div class="single-game mb-50">
                         <div class="game-img">

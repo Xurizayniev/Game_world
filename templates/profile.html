@@ -1,10 +1,17 @@
 {% extends 'layouts/base.html' %}
-{% load static %}
+{% load static i18n %}
 {% block title %} PROFILE GAME {% endblock %}
 {% block content %}
 
+    <!--Page Banner Area Start-->
+    {% include 'layouts/banner.html' %}
+    <!--Page Banner Area End-->
+
+
     <div class="row">
-        {% for game in user.games.values %}
+    <h4 style="padding: 2px">your game</h4>
+    {{ games }}
+        {% for game in games %}
             <div class="col-lg-4 col-md-6">
                 <div class="single-game mb-50">
                     <div class="game-img">
@@ -12,8 +19,8 @@
                     </div>
                     <div class="game-content">
                         <h4><a href="{% url 'games:detail' game.id %}">{{ game.title }}</a></h4>
-                        {% for platform in game.platform.name %}
-                            <span>{{ platform }}/</span>
+                        {% for platform in game.platform.values %}
+                            <span>{{ platform.name }}/</span>
                         {% endfor %}
                     </div>
                 </div>

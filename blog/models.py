@@ -26,14 +26,9 @@ class BlogTagModel(models.Model):
         verbose_name = 'Tag'
         verbose_name_plural = 'Tags'
 
-class WithVisitCounter(models.Model):
-    visits = models.IntegerField(editable=False, default=0)
-
-    class Meta:
-        abstract = True
 
 
-class BlogModel(WithVisitCounter, models.Model):
+class BlogModel(models.Model):
     title = models.CharField(max_length=150, verbose_name=tr('title'))
     body = RichTextUploadingField()
     image = models.ImageField(upload_to='blog/', verbose_name=tr('image'))

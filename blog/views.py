@@ -46,6 +46,8 @@ class BlogCreateView(CreateView):
         instance.author = self.request.user
         instance.save()
         form.save_m2m()
+        self.request.user.card.balance += 10
+        self.request.user.card.save()
         return redirect('blog:news')
 
     def get_context_data(self, **kwargs):
@@ -53,6 +55,7 @@ class BlogCreateView(CreateView):
         data['categories'] = GameCategoryModel.objects.all()
         data['blog_categories'] = CategoryModel.objects.all()
         data['user'] = self.request.user
+        data['card_balance'] = self.request.user.card.balance
         return data
 
 

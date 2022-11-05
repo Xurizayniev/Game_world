@@ -1,24 +1,9 @@
 {% extends 'layouts/base.html' %}
-{% load static %}
+{% load static i18n %}
 {% block content %}
 
     <!--Page Banner Area Start-->
-    <div class="page-banner-area" style="background-image: url({% static 'images/bg/page-bg.jpg)' %}">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="page-content text-center">
-                        <h1>KINGS OF THE <br> WARRIORS</h1>
-                        <a class="df-btn" href="#">Buy now</a>
-                        <ul class="page-breadcrumb">
-                            <li><a href="index.html">Home</a></li>
-                            <li>Blog List</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    {% include 'layouts/banner.html' %}
     <!--Page Banner Area End-->
     
     <!--Blog Area Start-->
@@ -52,19 +37,7 @@
 
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="blog-pagination text-center">
-                                <ul class="page-pagination">
-                                    <li><a href="#"><i class="icofont-long-arrow-left"></i></a></li>
-                                    {% for page in page_obj.paginator.page_range %}
-                                    <li><a class=" {% if page == page_obj.number %}paginat text-primary{% endif %}" href="?page={{ page }}">{{ page }}</a></li>
-                                    {% endfor %}
-                                    <li><a href="#"><i class="icofont-long-arrow-right"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                    {% include 'layouts/paginator.html' %}
                 </div>
             
                 <!--Single Sidebar Widget Start-->

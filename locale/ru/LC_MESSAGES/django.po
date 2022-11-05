@@ -1,0 +1,224 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-11-03 21:59+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || (n"
+"%100>=11 && n%100<=14)? 2 : 3);\n"
+#: config/settings.py:131
+msgid "en"
+msgstr "анг"
+
+#: config/settings.py:132
+msgid "ru"
+msgstr "ру"
+
+#: config/settings.py:133
+msgid "uz"
+msgstr "уз"
+
+#: games/models.py:9 games/models.py:21 games/models.py:33 games/models.py:66
+msgid "created_at"
+msgstr "время создания"
+
+#: games/models.py:20 games/models.py:32
+msgid "name"
+msgstr "Название"
+
+#: games/models.py:53
+msgid "title"
+msgstr "Название"
+
+#: games/models.py:55
+msgid "poster"
+msgstr "Постер"
+
+#: games/models.py:56 games/models.py:57 games/models.py:58 games/models.py:59
+msgid "image body"
+msgstr "Внутренний постер"
+
+#: games/models.py:61
+msgid "company"
+msgstr "Компания"
+
+#: games/models.py:62
+msgid "category"
+msgstr "Категория"
+
+#: games/models.py:63
+msgid "platform"
+msgstr "Платформа"
+
+#: templates/blog-create.html:23
+msgid "Create post"
+msgstr "Создать пост"
+
+#: templates/blog-detail.html:37
+msgid "Tags:"
+msgstr "Теги:"
+
+#: templates/blog-detail.html:48
+msgid "Comments"
+msgstr "Комментарии"
+
+#: templates/blog-detail.html:58
+msgid "Reply"
+msgstr "Ответить"
+
+#: templates/blog-detail.html:65
+msgid "Leave a reply"
+msgstr "Оставьте ответ"
+
+#: templates/blog-detail.html:77
+msgid "Please sign up before you add comment"
+msgstr "Пожалуйста, зарегистрируйтесь перед добавлением комментария"
+
+#: templates/checkout.html:128
+msgid "Games"
+msgstr "Игры"
+
+#: templates/checkout.html:128
+msgid "Total"
+msgstr "Общий"
+
+#: templates/game-detail.html:54
+msgid "compitable for"
+msgstr "Можно играть в"
+
+#: templates/game-detail.html:60
+msgid "PRICE AND DOWNLOAD"
+msgstr "Цена/Скачать"
+
+#: templates/game-detail.html:66
+msgid "Remove from Cart"
+msgstr "Убрать из Корзины"
+
+#: templates/game-detail.html:68
+msgid "Add to Cart"
+msgstr "Добавить в Корзинку"
+
+#: templates/game-detail.html:72
+msgid "Go to the system to buy"
+msgstr "Зарегистрируйтесь чтобы купить"
+
+#: templates/game-detail.html:81
+msgid "ratings"
+msgstr "Рейтинг"
+
+#: templates/games.html:19 templates/video.html:33
+msgid "search games"
+msgstr "Поиск игр"
+
+#: templates/index.html:19
+msgid "Buy now"
+msgstr "Купить"
+
+#: templates/index.html:39
+msgid "FEATURED GAMES"
+msgstr "ПОПУЛЯРНЫЕ ИГРЫ"
+
+#: templates/index.html:40
+msgid "VIEW ALL GAMES"
+msgstr "Перейти в магазин"
+
+#: templates/index.html:68
+msgid "new"
+msgstr "Новые игры"
+
+#: templates/index.html:68 templates/layouts/navbar.html:24
+msgid "games"
+msgstr "Игры"
+
+#: templates/index.html:108
+msgid "view demo"
+msgstr "Посмотреть трейлер"
+
+#: templates/layouts/navbar.html:33
+msgid "trailer"
+msgstr "Трейлер"
+
+#: templates/layouts/navbar.html:34
+msgid "news"
+msgstr "Новости"
+
+#: templates/layouts/navbar.html:66
+msgid "Blog create"
+msgstr "Создать блог"
+
+#: templates/layouts/navbar.html:67
+msgid "logout"
+msgstr "Выйти"
+
+#: templates/layouts/navbar.html:70
+msgid "login"
+msgstr "Войти"
+
+#: templates/layouts/navbar.html:71
+msgid "register"
+msgstr "Регистрация"
+
+#: templates/layouts/sidebar.html:6
+msgid "featured games"
+msgstr "Избранные игры"
+
+#: templates/layouts/sidebar.html:20 templates/layouts/sidebar.html:83
+msgid "follow us"
+msgstr "Подписывайтесь на нас"
+
+#: templates/layouts/sidebar.html:33
+msgid "popular/recomended"
+msgstr "Популярные/Рекомендуемое"
+
+#: templates/layouts/sidebar.html:56
+msgid "recent post"
+msgstr "Недавний пост"
+
+#: templates/layouts/toolbar.html:5
+msgid "Platform"
+msgstr "Платформа"
+
+#: templates/layouts/toolbar.html:14
+msgid "Category"
+msgstr "Категория"
+
+#: templates/login.html:22
+msgid "Login to your account"
+msgstr "Вход аккаунт"
+
+#: templates/login.html:23 templates/register.html:36
+msgid "Go to the system to buy games, add comment add comments to a post"
+msgstr "Зарегистрируйтесь чтобы купить игры и оставить комментарии в посте"
+
+#: templates/login.html:41
+msgid "Don’t have account? please click"
+msgstr "Нету аккаунта? Нажмите!"
+
+#: templates/login.html:56
+msgid "Also you can login with..."
+msgstr "Также вы можете войти с помощью..."
+
+#: templates/register.html:17
+msgid "Login"
+msgstr "Логин"
+
+#: templates/register.html:35
+msgid "We will need for your registration"
+msgstr "Нам понадобится чтобы вы зарегистрировались в систему"
+
+#: templates/video.html:16
+msgid "Video"
+msgstr "Видео"

@@ -47,9 +47,9 @@ def user_registration(request):
             user = form.save(commit=False)
             user.set_password(user.password)
             user.card = CardModel.objects.create(number=num)
+            request.session.get('cart', [])
             user.save()
             return redirect('users:login')
-    
     return render(request, 'register.html', context={
         'form': form,
         'categories': categories,

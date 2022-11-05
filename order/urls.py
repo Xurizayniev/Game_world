@@ -6,5 +6,5 @@ app_name = 'order'
 
 urlpatterns = [
     path('checkout/', checkoutview, name='checkout'),
-path('profile/', profile, name='profile')
+    path('profile/', profile, name='profile')
 ]

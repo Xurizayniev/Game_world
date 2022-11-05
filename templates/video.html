@@ -1,5 +1,5 @@
 {% extends 'layouts/base.html' %}
-{% load static %}
+{% load static i18n %}
 {% block title %} VIDEOS {% endblock %}
 {% block content %}
     
@@ -13,7 +13,7 @@
                         <a class="df-btn" href="#">Buy now</a>
                         <ul class="page-breadcrumb">
                             <li><a href="index.html">Home</a></li>
-                            <li>Video</li>
+                            <li>{% trans "Video" %}</li>
                         </ul>
                     </div>
                 </div>
@@ -30,8 +30,8 @@
                     <div class="game-topbar-wrapper d-md-flex justify-content-md-between align-items-center">
                     <!--Game Toolbar Start-->
                     <div class="game-search-box">
-                        <h3>search games</h3>
-                        <form action="{% url 'games:trailer' %}", method="GET"> 
+                        <h3>{% trans "search games" %}</h3>
+                        <form action="{% url 'games:trailer' %}" method="GET">
                         <input type="text" name="game_search" placeholder="Enter games name">
                         <button type="submit"><i class="icofont-search-2"></i></button>
                         </form>

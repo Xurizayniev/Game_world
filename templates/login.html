@@ -5,25 +5,11 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
+
     <!--Page Banner Area Start-->
-    <div class="page-banner-area" style="background-image: url(assets/images/bg/page-bg.jpg)">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="page-content text-center">
-                        <h1>KINGS OF THE <br> WARRIORS</h1>
-                        <a class="df-btn" href="#">Buy now</a>
-                        <ul class="page-breadcrumb">
-                            <li><a href="index.html">Home</a></li>
-                            <li>Login</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    {% include 'layouts/banner.html' %}
     <!--Page Banner Area End-->
-    
+
      <!--Login Section Start-->
     <div class="login-section section pt-95 pt-lg-75 pt-md-65 pt-sm-55 pt-xs-45">
         <div class="container">
@@ -33,8 +19,8 @@
                 <div class="col-md-6 col-12 d-flex">
                     <div class="gilbard-login">
 
-                        <h3>Login to your account</h3>
-                        <p>Gilbard provide how all this mistaken idea of denouncing pleasure and sing pain born an will give you a complete account of the system, and expound</p>
+                        <h3>{% trans "Login to your account" %}</h3>
+                        <p>{% trans "Go to the system to buy games, add comment add comments to a post" %}</p>
 
                         <!-- Login Form -->
                         <form action="{% url 'users:login' %}" method="post">
@@ -52,7 +38,7 @@
                                 <div class="col-12"><input type="submit" value="LOGIN"></div>
                             </div>
                         </form>
-                        <h4>Don’t have account? please click <a href="{% url 'users:register' %}">Register</a></h4>
+                        <h4>{% trans "Don’t have account? please click" %}<a href="{% url 'users:register' %}">Register</a></h4>
 
                     </div>
                 </div>
@@ -67,16 +53,13 @@
                 <div class="col-md-5 col-12 d-flex">
 
                     <div class="gilbard-social-login">
-                        <h3>Also you can login with...</h3>
+                        <h3>{% trans "Also you can login with..." %}</h3>
 
                         <a href="#" class="facebook-login">Login with <i class="fa fa-facebook"></i></a>
                         <a href="#" class="twitter-login">Login with <i class="fa fa-twitter"></i></a>
                         <a href="#" class="google-plus-login">Login with <i class="fa fa-google-plus"></i></a>
-
                     </div>
-
                 </div>
-
             </div>
         </div>
     </div>

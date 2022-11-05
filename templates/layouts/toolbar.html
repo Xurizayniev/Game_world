@@ -1,8 +1,9 @@
+{% load i18n %}
 <div class="game-topbar-wrapper d-md-flex justify-content-md-between align-items-center">
      <!--Toolbar Short Area Start-->
      <div class="toolbar-short-area d-md-flex align-items-center">
          <div class="toolbar-shorter">
-            <h3>Platform</h3>
+            <h3>{% trans 'Platform' %}</h3>
              <select onchange="addUrlParameter('platform', this.value)" class="wide">
                  <option data-display="Select">Platform</option>
                  {% for platform in platforms %}
@@ -11,7 +12,7 @@
              </select>
          </div>
          <div class="toolbar-shorter">
-            <h3>Category</h3>
+            <h3>{% trans 'Category' %}Category</h3>
              <select onchange="addUrlParameter('category', this.value)" class="wide">
                  <option data-display="Select">Category</option>
                  {% for category in categories %}

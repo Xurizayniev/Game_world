@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'users',
     'games',
     'blog',
-    'order'
+    'order',
 ]
 
 MIDDLEWARE = [
@@ -81,6 +81,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
+
+
 
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
@@ -123,15 +125,19 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = 'ru'
+LANGUAGE_CODE = 'en-us'
+
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'en'
 
 LANGUAGES = [
     ('en', 'English'),
     ('ru', 'Russian'),
-    ('uz', 'Uzbek')
+    ('uz', 'Uzbek'),
 ]
 
 LOCALE_PATHS = BASE_DIR / 'locale',
+
+
 
 TIME_ZONE = 'UTC'
 

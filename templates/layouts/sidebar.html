@@ -1,9 +1,9 @@
-{% load static %}
+{% load static i18n %}
                 <div class="col-lg-4">
                     <div class="sidebar-area mt-sm-60 mt-xs-50">
                         <!--Single Sidebar Widget Start-->
                         <div class="single-sidebar-widget mb-45">
-                            <h3>featured games</h3>
+                            <h3>{% trans 'featured games' %}</h3>
                             {% for game in games %}
                             <div class="single-featured-game mb-20">
                                 <div class="game-img">
@@ -17,7 +17,7 @@
                         <!--Single Sidebar Widget End-->
                         <!--Single Sidebar Widget Start-->
                         <div class="single-sidebar-widget mb-45">
-                            <h3>follow us</h3>
+                            <h3>{% trans 'follow us' %}</h3>
                             <div class="sidebar-social">
                                 <ul>
                                     <li><a class="facebook" href="#"><i class="icofont-facebook"></i></a></li>
@@ -30,7 +30,7 @@
                         <!--Single Sidebar Widget End-->
                         <!--Single Sidebar Widget Start-->
                         <div class="single-sidebar-widget mb-45">
-                            <h3>popular/recomended</h3>
+                            <h3>{% trans 'popular/recomended' %}</h3>
                             <div class="popular-game mb-20">
                                 <div class="game-img">
                                     <a href="#"><img src="assets/images/banner/sidebar-banner3.jpg" alt=""></a>
@@ -53,7 +53,7 @@
                         <!--Single Sidebar Widget End-->
                         <!--Single Sidebar Widget Start-->
                         <div class="single-sidebar-widget mb-45">
-                            <h3>recent post</h3>
+                            <h3>{% trans 'recent post' %}</h3>
                             <div class="sidebar-rc-post">
                                 {% for blog in blogs %}
                                 <ul>
@@ -80,7 +80,7 @@
                         <!--Single Sidebar Widget End-->
                         <!--Single Sidebar Widget Start-->
                         <div class="single-sidebar-widget">
-                            <h3>follow us</h3>
+                            <h3>{% trans 'follow us' %}</h3>
                             <div class="sidebar-instagram">
                                 <ul>
                                     <li><a href="#"><img src="{% static 'images/instagram/instagram1.jpg' %}" alt=""></a></li>

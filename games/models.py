@@ -65,9 +65,6 @@ class GameModel(models.Model):
     price = models.DecimalField(max_digits=5, decimal_places=2)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('created_at'))
 
-    def get_platform(self):
-        return self.platform
-
 
     @staticmethod
     def get_cart_info(request):

@@ -1,15 +1,16 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from django.views.generic import *
-from .models import OrderHistoryModel
-from games.models import GameModel
+from games.models import GameModel, GameCategoryModel
 from .forms import OrderForm
 from django.db.models import Sum
 from django.contrib.auth.decorators import login_required
-from games.models import GameCategoryModel
 from blog.models import CategoryModel
-
+from users.models import CardModel
 @login_required()
 def checkoutview(request):
+    session = request.session.get('cart', [])
+    if len(session) == 0:
+        return redirect(reverse('games:home'))
     form = OrderForm
     user = request.user
     game = GameModel.get_cart_objects(request)
@@ -21,13 +22,16 @@ def checkoutview(request):
     if request.method == 'POST':
         form = OrderForm(data=request.POST)
         if form.is_valid():
-            if card.number == form.cleaned_data['card_number'] and card.balance < total_price:
+            if total_price == form.cleaned_data['price']:
                  card.balance -= total_price
-                 user.games.set(game)
-                 del request.session['cart']
+                 user.games.add(*game)
+                 card.balance -= total_price
+                 card.save()
+                 print('cart')
+                 request.session['cart'] = []
                  return redirect('games:home')
             else:
-                form.add_error('card_number', 'Error')
+                form.add_error('price', 'Error')
     return render(request, 'checkout.html', context={
         'username': username,
         'categories': category,
@@ -37,7 +41,8 @@ def checkoutview(request):
 
 def profile(request):
     user = request.user
-    print(user)
+    games = user.games.all()
     return render(request, 'profile.html', context={
-        'user': user
+        'user': user,
+        'games': games,
     })

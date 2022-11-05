@@ -1,26 +1,12 @@
 {% extends 'layouts/base.html' %}
 {% block title %} Checkout {% endblock %}
 {% load my_tags %}
+{% load i18n %}
 {% load crispy_forms_tags %}
 {% block content %}
 
     <!--Page Banner Area Start-->
-    <div class="page-banner-area" style="background-image: url(assets/images/bg/page-bg.jpg)">
-        <div class="container">
-            <div class="row">
-                <div class="col-12">
-                    <div class="page-content text-center">
-                        <h1>KINGS OF THE <br> WARRIORS</h1>
-                        <a class="df-btn" href="#">Buy now</a>
-                        <ul class="page-breadcrumb">
-                            <li><a href="index.html">Home</a></li>
-                            <li>Checkout</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    {% include 'layouts/banner.html' %}
     <!--Page Banner Area End-->
     
     <!--Checkout Area Start-->
@@ -140,7 +126,7 @@
 
                                        <div class="checkout-cart-total">
 
-                                           <h4>Games <span>Total</span></h4>
+                                           <h4>{% trans 'Games' %} <span>{% trans 'Total' %}Total</span></h4>
 
                                            <ul>
                                                {% get_name request as games %}
