@@ -13,7 +13,6 @@
                     <div class="logo">
                         <a href="{% url 'games:home' %}"><img src="{% static 'images/logo.png' %}" alt=""></a>
                     </div>
-                    <h1></h1>
                 </div>
                 <!--Logo end-->
 
@@ -21,6 +20,9 @@
                 <div class="col-lg-6 col-12 order-md-3 order-lg-2 d-flex justify-content-center">
                     <nav class="main-menu menu-style-2">
                         <ul>
+                        {% if request.user.is_authenticated %}
+                            <li class="cardbalance">{{ request.user.card.balance }}$</li>
+                        {% endif %}
                             <li><a href="{% url 'games:list' %}">{% trans 'games' %}</a>
                                 <ul class="sub-menu">
                                     {% for category in categories %}
@@ -40,6 +42,9 @@
                                     {% endfor %}
                                 </ul>
                             </li>
+                        {% if request.user.is_authenticated %}
+                        <li><a href="{% url 'order:checkout' %}">{% trans 'Checkout' %}</a>
+                            {% endif %}
                         {% get_current_language as lang %}
                             <li class="lang"> {{ lang }}
                                 {% get_available_languages as LANGUAGE %}

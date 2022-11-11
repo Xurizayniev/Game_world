@@ -7,15 +7,15 @@
     <div class="hero-section section position-relative">
         <div class="hero-slider">
             <!--Hero Item start-->
+
             {% for game in games %}
-                <div class="hero-item hero-item-2" style="background-image: {{ game.image_body2.url }}">
+                <div class="hero-item hero-item-2" style="background-image: url({{ game.image_body2.url }})">
                     <div class="container container-1520">
                         <div class="row">
                             <div class="col-12">
                                 <!--Hero Content start-->
                                 <div class="hero-content">
                                     <h1>{{ game.title }}</h1>
-                                    <h2></h2>
                                     <a class="df-btn" href="#">{% trans 'Buy now' %}</a>
                                 </div>
                                 <!--Hero Content end-->
@@ -25,9 +25,7 @@
                 </div>
             {% endfor %}
             <!--Hero Content end-->
-
         </div>
-    </div>
 
     <!--Featured section start-->
     <div class="featured-section section pb-95 pb-lg-75 pb-md-65 pb-sm-55 pb-xs-45">
@@ -47,7 +45,7 @@
                     <div class="featured-slide">
                         {% for game in games %}
                             <div class="single-featured img-full">
-                                <a href="{% url 'games:detail' game.pk %}"><img src="{{ game.poster.url }}" alt=""></a>
+                                <a href="{% url 'games:detail' game.pk %}"><img src="{{ game.image_body2.url }}" alt=""></a>
                             </div>
                         {% endfor %}
                     </div>

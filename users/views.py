@@ -9,6 +9,8 @@ from .models import *
 from games.models import GameCategoryModel, GameModel
 from blog.models import CategoryModel
 from django.http import HttpResponse
+from django.contrib import messages
+from django.utils.translation import gettext_lazy as tr
 import random
 
 def loginview(request):
@@ -49,6 +51,7 @@ def user_registration(request):
             user.card = CardModel.objects.create(number=num)
             request.session.get('cart', [])
             user.save()
+            messages.success(request, tr('Registration is successfully done'))
             return redirect('users:login')
     return render(request, 'register.html', context={
         'form': form,

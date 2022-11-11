@@ -9,6 +9,8 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
+from django.contrib.messages import constants as messages
+
 from decouple import config
 
 from pathlib import Path
@@ -185,3 +187,8 @@ INTERNAL_IPS = [
 
 AUTH_USER_MODEL = 'users.UserModel'
 LOGOUT_REDIRECT_URL = "login/"
+
+
+MESSAGE_TAGS = {
+    messages.SUCCESS: 'alert alert-success alert-dismissible',
+}

@@ -1,3 +1,4 @@
+import django.utils.functional
 from django.shortcuts import render, redirect
 from .models import GameCategoryModel, GameModel, PlatformModel
 from blog.models import BlogModel,  CategoryModel
@@ -55,14 +56,26 @@ def GameDetail(request, pk):
     category = GameCategoryModel.objects.all()
     blog_categories = CategoryModel.objects.all()
     user = request.user
-    return render(request, 'game-detail.html', context={
-        'object': object,
-        'games': game,
-        'blogs': blogs,
-        'categories': category,
-        'blog_categories': blog_categories,
-        'user': user
+    if request.user.is_authenticated:
+        games = user.games.all()
+        return render(request, 'game-detail.html', context={
+            'object': object,
+            'games': game,
+            'blogs': blogs,
+            'categories': category,
+            'blog_categories': blog_categories,
+            'user': user,
+            'buy': games
     })
+    else:
+        return render(request, 'game-detail.html', context={
+            'object': object,
+            'games': game,
+            'blogs': blogs,
+            'categories': category,
+            'blog_categories': blog_categories,
+            'user': user,
+        })
 
 class VideoListView(ListView):
     model = GameModel

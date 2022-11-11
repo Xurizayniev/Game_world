@@ -27,7 +27,6 @@ def checkoutview(request):
                  user.games.add(*game)
                  card.balance -= total_price
                  card.save()
-                 print('cart')
                  request.session['cart'] = []
                  return redirect('games:home')
             else:
@@ -42,6 +41,7 @@ def checkoutview(request):
 def profile(request):
     user = request.user
     games = user.games.all()
+    print(type(games))
     return render(request, 'profile.html', context={
         'user': user,
         'games': games,

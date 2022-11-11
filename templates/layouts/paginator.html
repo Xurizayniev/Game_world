@@ -3,19 +3,19 @@
                     <div class="blog-pagination text-center">
                         <ul class="page-pagination">
                         {% if page_obj.has_previous %}
-                            <li><a href="?page={{ page_obj.previous_page_number }}"><i class="icofont-long-arrow-left"></i></a></li>
+                            <li><a {% if request.GET %}href="{{ request.get_full_path }}&page={{ page_obj.previous_page_number }}"{% else %}href="?page={{ page_obj.previous_page_number }}"{% endif %}><i class="icofont-long-arrow-left"></i></a></li>
                         {% endif %}
                                 {% for page in page_obj.paginator.page_range %}
                                     {% if page_obj.number == page %}
-                                    <li><a class="{% if page == page_obj.number %}paginat text-primary{% endif %}" href="?page={{ page }}">{{ page }}</a></li>
+                                    <li><a class="{% if page == page_obj.number %}paginat text-primary{% endif %}" {% if request.GET %}href="{{ request.get_full_path }}&page={{ page }}"{% else %}href="?page={{ page }}"{% endif %}>{{ page }}</a></li>
                                     {% elif page >= page_obj.number|add:-2 and page <= page_obj.number|add:2 %}
-                                    <li><a class="{% if page == page_obj.number %}paginat text-primary{% endif %}" href="?page={{ page }}">{{ page }}</a></li>
+                                    <li><a class="{% if page == page_obj.number %}paginat text-primary{% endif %}" {% if request.GET %}href="{{ request.get_full_path }}&page={{ page }}"{% else %}href="?page={{ page }}"{% endif %}>{{ page }}</a></li>
                                     {% endif %}
                                     {% endfor %}
 
                         {% if page_obj.has_next %}
 
-                            <li><a href="?page={{ page_obj.next_page_number }}"><i class="icofont-long-arrow-right"></i></a></li>
+                            <li><a {% if request.GET %}href="{{ request.get_full_path }}&page={{ page_obj.next_page_number }}"{% else %}href="?page={{ page_obj.next_page_number }}"{% endif %}><i class="icofont-long-arrow-right"></i></a></li>
                         {% endif %}
                         </ul>
                     </div>

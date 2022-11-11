@@ -3,263 +3,265 @@
 {% load my_tags %}
 {% block content %}
 
-    <!--Page Banner Area Start-->
-    {% include 'layouts/banner.html' %}
-    <!--Page Banner Area End-->
+<!--Page Banner Area Start-->
+{% include 'layouts/banner.html' %}
+<!--Page Banner Area End-->
 
 
-    <!--Games Details Area Start-->
-    <div class="games-details-area section pt-100 pt-lg-80 pt-md-70 pt-sm-60 pt-xs-50 pb-xs-45">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8">
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="game-image-gallery-wrap">
-                                <div class="game-image-large">
-                                    <div class="game-image img-full">
-                                        <img src="{{ object.image_body4.url }}" alt="">
-                                    </div>
-                                    <div class="game-image img-full">
-                                        <img src="{{ object.image_body.url }}" alt="">
-                                    </div>
-                                    <div class="game-image img-full">
-                                        <img src="{{ object.image_body2.url }}" alt="">
-                                    </div>
-                                    <div class="game-image img-full">
-                                        <img src="{{ object.image_body3.url }}" alt="">
-                                    </div>
-                                </div>
-                                <div class="game-image-thumbs">
-                                    <div class="sm-image"><img src="{{ object.image_body4.url }}"
-                                                               alt="product image thumb"></div>
-                                    <div class="sm-image"><img src="{{ object.image_body.url }}"
-                                                               alt="product image thumb"></div>
-                                    <div class="sm-image"><img src="{{ object.image_body2.url }}"
-                                                               alt="product image thumb"></div>
-                                    <div class="sm-image"><img src="{{ object.image_body3.url }}"
-                                                               alt="product image thumb"></div>
-                                </div>
-                                <div class="game-description mb-45">
-                                    <h3>{{ object.title }}</h3>
-                                    <p>{{ object.body|safe }}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="timelaine-wrapper mb-30">
-                                <div class="single-timeline pb-30">
-                                    <h4>{% trans 'compitable for' %}</h4>
-                                    {% for platform in object.platform.values %}
-                                        <span>{{ platform.name }}/</span>
-                                    {% endfor %}
-                                </div>
-                                <div class="single-timeline pb-30">
-                                    <h4>{% trans 'PRICE AND DOWNLOAD' %}</h4>
-                                    <span class="game-price">{{ object.price }}$</span>
-                                    {% if request.user.is_authenticated %}
-                                        <a href="{% url 'games:add' object.pk %}?next={{ request.path }}"
-                                           class="add-cart">
-                                            {% if object|is_cart:request %}
-                                                - {% trans 'Remove from Cart' %}
-                                            {% else %}
-                                                + {% trans 'Add to Cart' %}
-                                            {% endif %}
-                                        </a>
-                                    {% else %}
-                                        <a href="{% url 'users:register' %}">{% trans 'Go to the system to buy' %}</a>
-                                    {% endif %}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="ratting-wrap mb-40">
-                                <h3>{% trans 'ratings' %}</h3>
-                                <div class="rating-area">
-                                    <div class="total-rating">
-                                        <h2>4.82</h2>
-                                        <span>(4.8 out of 5)</span>
-                                    </div>
-                                    <div class="rating-review">
-                                        <div class="single-rating">
-                                            <div class="rating-star">
-                                                <span>5</span>
-                                                <i class="fa fa-star"></i>
-                                            </div>
-                                            <div class="rating-progress">
-                                                <div class="progress">
-                                                    <div class="progress-bar wow fadeInLeft" role="progressbar"
-                                                         style="width: 90%" aria-valuenow="90" aria-valuemin="0"
-                                                         aria-valuemax="100" data-wow-duration="1.5s"
-                                                         data-wow-delay="1.2s"></div>
-                                                </div>
-                                            </div>
-                                            <div class="rating-count">
-                                                <span>980</span>
-                                            </div>
-                                        </div>
-                                        <div class="single-rating">
-                                            <div class="rating-star">
-                                                <span>4</span>
-                                                <i class="fa fa-star"></i>
-                                            </div>
-                                            <div class="rating-progress">
-                                                <div class="progress">
-                                                    <div class="progress-bar wow fadeInLeft" role="progressbar"
-                                                         style="width: 70%" aria-valuenow="70" aria-valuemin="0"
-                                                         aria-valuemax="100" data-wow-duration="1.5s"
-                                                         data-wow-delay="1.2s"></div>
-                                                </div>
-                                            </div>
-                                            <div class="rating-count">
-                                                <span>280</span>
-                                            </div>
-                                        </div>
-                                        <div class="single-rating">
-                                            <div class="rating-star">
-                                                <span>3</span>
-                                                <i class="fa fa-star"></i>
-                                            </div>
-                                            <div class="rating-progress">
-                                                <div class="progress">
-                                                    <div class="progress-bar wow fadeInLeft" role="progressbar"
-                                                         style="width: 50%" aria-valuenow="50" aria-valuemin="0"
-                                                         aria-valuemax="100" data-wow-duration="1.5s"
-                                                         data-wow-delay="1.2s"></div>
-                                                </div>
-                                            </div>
-                                            <div class="rating-count">
-                                                <span>89</span>
-                                            </div>
-                                        </div>
-                                        <div class="single-rating">
-                                            <div class="rating-star">
-                                                <span>2</span>
-                                                <i class="fa fa-star"></i>
-                                            </div>
-                                            <div class="rating-progress">
-                                                <div class="progress">
-                                                    <div class="progress-bar wow fadeInLeft" role="progressbar"
-                                                         style="width: 30%" aria-valuenow="30" aria-valuemin="0"
-                                                         aria-valuemax="100" data-wow-duration="1.5s"
-                                                         data-wow-delay="1.2s"></div>
-                                                </div>
-                                            </div>
-                                            <div class="rating-count">
-                                                <span>25</span>
-                                            </div>
-                                        </div>
-                                        <div class="single-rating">
-                                            <div class="rating-star">
-                                                <span>1</span>
-                                                <i class="fa fa-star"></i>
-                                            </div>
-                                            <div class="rating-progress">
-                                                <div class="progress">
-                                                    <div class="progress-bar wow fadeInLeft" role="progressbar"
-                                                         style="width: 10%" aria-valuenow="10" aria-valuemin="0"
-                                                         aria-valuemax="100" data-wow-duration="1.5s"
-                                                         data-wow-delay="1.2s"></div>
-                                                </div>
-                                            </div>
-                                            <div class="rating-count">
-                                                <span>25</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="review-wrap">
-                                <h3>reviews(120)</h3>
-                                <!--Single Review Start-->
-                                <div class="single-review mb-30">
-                                    <h4>Best action game play ever</h4>
-                                    <div class="ratting">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star-half-o"></i>
-                                    </div>
-                                    <p>The Witcher 3 is the best action game that i play ever. encounter consequences
-                                        that are mely painful. Nor again is there me anyone who loves or pursues or
-                                        desires take a trivial meaning less sexample, which of us ever undertakes
-                                        laborious physical exercise.</p>
-                                    <div class="review-name-action">
-                                        <a href="#">Adam Smith</a>
-                                        <ul>
-                                            <li><a href="#"><i class="fa fa-thumbs-o-up"></i>425</a></li>
-                                            <li><a href="#"><i class="fa fa-thumbs-o-down"></i>65</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!--Single Review End-->
-                                <!--Single Review Start-->
-                                <div class="single-review mb-30">
-                                    <h4>Really love this game</h4>
-                                    <div class="ratting">
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star"></i>
-                                        <i class="fa fa-star-half-o"></i>
-                                    </div>
-                                    <p>The Witcher 3 is the best action game that i play ever. encounter consequences
-                                        that are mely painful. Nor again is there me anyone who loves or pursues or
-                                        desires take a trivial meaning less sexample, which of us ever undertakes
-                                        laborious physical exercise.</p>
-                                    <div class="review-name-action">
-                                        <a href="#">Thomas Morgan</a>
-                                        <ul>
-                                            <li><a href="#"><i class="fa fa-thumbs-o-up"></i>425</a></li>
-                                            <li><a href="#"><i class="fa fa-thumbs-o-down"></i>65</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <!--Single Review End-->
-                                <div class="reply-btn">
-                                    <a href="#">view more <i class="icofont-long-arrow-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!--Single Sidebar Widget Start-->
-                {% include 'layouts/sidebar.html' %}
-                <!--Single Sidebar Widget End-->
-            </div>
-        </div>
-        <!--Games Details Area End-->
-
-        <!--Projects section start-->
-        <div class="newslatter-section newslatter-section-tow section pt-5 pt-lg-0 pt-sm-0 pb-xs-50">
-            <div class="container">
-
+<!--Games Details Area Start-->
+<div class="games-details-area section pt-100 pt-lg-80 pt-md-70 pt-sm-60 pt-xs-50 pb-xs-45">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
                 <div class="row">
                     <div class="col-12">
-                        <!--News Latter Area Start-->
-                        <div class="news-latter-area newslatter-black">
-                            <div class="news-latter-box">
-                                <h3>SUBSCRIBE OUR NEWSLETTER, GET ALL <br> LATEST NEWS, UPDATE, VIDEOS AND OFFERS </h3>
-                                <form action="#">
-                                    <input type="text" placeholder="Enter your email here">
-                                </form>
+                        <div class="game-image-gallery-wrap">
+                            <div class="game-image-large">
+                                <div class="game-image img-full">
+                                    <img src="{{ object.image_body4.url }}" alt="">
+                                </div>
+                                <div class="game-image img-full">
+                                    <img src="{{ object.image_body.url }}" alt="">
+                                </div>
+                                <div class="game-image img-full">
+                                    <img src="{{ object.image_body2.url }}" alt="">
+                                </div>
+                                <div class="game-image img-full">
+                                    <img src="{{ object.image_body3.url }}" alt="">
+                                </div>
+                            </div>
+                            <div class="game-image-thumbs">
+                                <div class="sm-image"><img src="{{ object.image_body4.url }}"
+                                                           alt="product image thumb"></div>
+                                <div class="sm-image"><img src="{{ object.image_body.url }}"
+                                                           alt="product image thumb"></div>
+                                <div class="sm-image"><img src="{{ object.image_body2.url }}"
+                                                           alt="product image thumb"></div>
+                                <div class="sm-image"><img src="{{ object.image_body3.url }}"
+                                                           alt="product image thumb"></div>
+                            </div>
+                            <div class="game-description mb-45">
+                                <h3>{{ object.title }}</h3>
+                                <p>{{ object.body|safe }}</p>
                             </div>
                         </div>
-                        <!--News Latter Area End-->
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="timelaine-wrapper mb-30">
+                            <div class="single-timeline pb-30">
+                                <h4>{% trans 'compitable for' %}</h4>
+                                {% for platform in object.platform.values %}
+                                    <span>{{ platform.name }}/</span>
+                                {% endfor %}
+                            </div>
+                            <div class="single-timeline pb-30">
+                                <h4>{% trans 'PRICE AND DOWNLOAD' %}</h4>
+                                <span class="game-price">{{ object.price }}$</span>
+                            {% for game in buy %}
+                                {% if request.user.is_authenticated and object.pk != game.pk %}
+                                    <a href="{% url 'games:add' object.pk %}?next={{ request.path }}"
+                                       class="add-cart">
+                                        {% if object|is_cart:request %}
+                                            - {% trans 'Remove from Cart' %}
+                                        {% else %}
+                                            + {% trans 'Add to Cart' %}
+                                        {% endif %}
+                                    </a>
+                                {% else %}
+                                     <h1>{% trans 'you already bought this game' %}</h1>
+                                     {% endif %}
+                            {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="ratting-wrap mb-40">
+                            <h3>{% trans 'ratings' %}</h3>
+                            <div class="rating-area">
+                                <div class="total-rating">
+                                    <h2>4.82</h2>
+                                    <span>(4.8 out of 5)</span>
+                                </div>
+                                <div class="rating-review">
+                                    <div class="single-rating">
+                                        <div class="rating-star">
+                                            <span>5</span>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                        <div class="rating-progress">
+                                            <div class="progress">
+                                                <div class="progress-bar wow fadeInLeft" role="progressbar"
+                                                     style="width: 90%" aria-valuenow="90" aria-valuemin="0"
+                                                     aria-valuemax="100" data-wow-duration="1.5s"
+                                                     data-wow-delay="1.2s"></div>
+                                            </div>
+                                        </div>
+                                        <div class="rating-count">
+                                            <span>980</span>
+                                        </div>
+                                    </div>
+                                    <div class="single-rating">
+                                        <div class="rating-star">
+                                            <span>4</span>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                        <div class="rating-progress">
+                                            <div class="progress">
+                                                <div class="progress-bar wow fadeInLeft" role="progressbar"
+                                                     style="width: 70%" aria-valuenow="70" aria-valuemin="0"
+                                                     aria-valuemax="100" data-wow-duration="1.5s"
+                                                     data-wow-delay="1.2s"></div>
+                                            </div>
+                                        </div>
+                                        <div class="rating-count">
+                                            <span>280</span>
+                                        </div>
+                                    </div>
+                                    <div class="single-rating">
+                                        <div class="rating-star">
+                                            <span>3</span>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                        <div class="rating-progress">
+                                            <div class="progress">
+                                                <div class="progress-bar wow fadeInLeft" role="progressbar"
+                                                     style="width: 50%" aria-valuenow="50" aria-valuemin="0"
+                                                     aria-valuemax="100" data-wow-duration="1.5s"
+                                                     data-wow-delay="1.2s"></div>
+                                            </div>
+                                        </div>
+                                        <div class="rating-count">
+                                            <span>89</span>
+                                        </div>
+                                    </div>
+                                    <div class="single-rating">
+                                        <div class="rating-star">
+                                            <span>2</span>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                        <div class="rating-progress">
+                                            <div class="progress">
+                                                <div class="progress-bar wow fadeInLeft" role="progressbar"
+                                                     style="width: 30%" aria-valuenow="30" aria-valuemin="0"
+                                                     aria-valuemax="100" data-wow-duration="1.5s"
+                                                     data-wow-delay="1.2s"></div>
+                                            </div>
+                                        </div>
+                                        <div class="rating-count">
+                                            <span>25</span>
+                                        </div>
+                                    </div>
+                                    <div class="single-rating">
+                                        <div class="rating-star">
+                                            <span>1</span>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                        <div class="rating-progress">
+                                            <div class="progress">
+                                                <div class="progress-bar wow fadeInLeft" role="progressbar"
+                                                     style="width: 10%" aria-valuenow="10" aria-valuemin="0"
+                                                     aria-valuemax="100" data-wow-duration="1.5s"
+                                                     data-wow-delay="1.2s"></div>
+                                            </div>
+                                        </div>
+                                        <div class="rating-count">
+                                            <span>25</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div class="review-wrap">
+                            <h3>reviews(120)</h3>
+                            <!--Single Review Start-->
+                            <div class="single-review mb-30">
+                                <h4>Best action game play ever</h4>
+                                <div class="ratting">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star-half-o"></i>
+                                </div>
+                                <p>The Witcher 3 is the best action game that i play ever. encounter consequences
+                                    that are mely painful. Nor again is there me anyone who loves or pursues or
+                                    desires take a trivial meaning less sexample, which of us ever undertakes
+                                    laborious physical exercise.</p>
+                                <div class="review-name-action">
+                                    <a href="#">Adam Smith</a>
+                                    <ul>
+                                        <li><a href="#"><i class="fa fa-thumbs-o-up"></i>425</a></li>
+                                        <li><a href="#"><i class="fa fa-thumbs-o-down"></i>65</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!--Single Review End-->
+                            <!--Single Review Start-->
+                            <div class="single-review mb-30">
+                                <h4>Really love this game</h4>
+                                <div class="ratting">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star-half-o"></i>
+                                </div>
+                                <p>The Witcher 3 is the best action game that i play ever. encounter consequences
+                                    that are mely painful. Nor again is there me anyone who loves or pursues or
+                                    desires take a trivial meaning less sexample, which of us ever undertakes
+                                    laborious physical exercise.</p>
+                                <div class="review-name-action">
+                                    <a href="#">Thomas Morgan</a>
+                                    <ul>
+                                        <li><a href="#"><i class="fa fa-thumbs-o-up"></i>425</a></li>
+                                        <li><a href="#"><i class="fa fa-thumbs-o-down"></i>65</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!--Single Review End-->
+                            <div class="reply-btn">
+                                <a href="#">view more <i class="icofont-long-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--Single Sidebar Widget Start-->
+            {% include 'layouts/sidebar.html' %}
+            <!--Single Sidebar Widget End-->
+        </div>
+    </div>
+    <!--Games Details Area End-->
 
+    <!--Projects section start-->
+    <div class="newslatter-section newslatter-section-tow section pt-5 pt-lg-0 pt-sm-0 pb-xs-50">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-12">
+                    <!--News Latter Area Start-->
+                    <div class="news-latter-area newslatter-black">
+                        <div class="news-latter-box">
+                            <h3>SUBSCRIBE OUR NEWSLETTER, GET ALL <br> LATEST NEWS, UPDATE, VIDEOS AND OFFERS </h3>
+                            <form action="#">
+                                <input type="text" placeholder="Enter your email here">
+                            </form>
+                        </div>
+                    </div>
+                    <!--News Latter Area End-->
+                </div>
             </div>
 
         </div>
-        <!--Projects section end-->
+
+    </div>
+    <!--Projects section end-->
 {% endblock %}
