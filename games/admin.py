@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import GameModel, PlatformModel, GameCategoryModel, CompanyModel
+from .models import GameModel, PlatformModel, GameCategoryModel, CompanyModel, RatingModel
 from modeltranslation.admin import TranslationAdmin
 
 @admin.register(PlatformModel)
@@ -7,6 +7,12 @@ class PlatformModelAdmin(admin.ModelAdmin):
     list_display = ['name', 'created_at']
     list_display_links = ['name']
     search_fields = ['name']
+
+@admin.register(RatingModel)
+class RatingModelAdmin(admin.ModelAdmin):
+    list_display = ['user', 'subject']
+    list_display_links = ['subject',]
+    search_fields = ['user']
 
 
 class GameCategoryModelAdmin(TranslationAdmin):

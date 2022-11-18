@@ -43,26 +43,28 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="row">
                         <div class="blog-comment-wrap col">
                             <h4>{% trans 'Comments' %}</h4>
                             <ul class="comment-list">
-                                <li>
-                                    <div class="single-comment">
-                                        {% for com in comment %}
-                                            <div class="image"><img src="{{ com.author.avatar.url }}" alt=""></div>
-                                            <div class="content">
-                                                <h5>{{ com.author.username }}</h5>
-                                                <div class="review-date">
-                                                    <span>{{ com.created_at|date:'d F Y' }}</span>
-                                                    <a href="#" class="reply">{% trans 'Reply' %}Reply</a>
-                                                </div>
-                                                <p>{{ com.body }}</p>
+                                <div class="single-comment">
+                                    {% for com in page_obj %}
+                                        <div class="image"><img src="{{ com.author.avatar.url }}" alt=""></div>
+                                        <div class="content">
+                                            <h5>{{ com.author.username }}</h5>
+                                            <div class="review-date">
+                                                <span>{{ com.created_at|date:'d F Y' }}</span>
+                                                <a href="#" class="reply">{% trans 'Reply' %}</a>
                                             </div>
-                                            </div>
-                                        {% endfor %}
+                                            <p>{{ com.body }}</p>
+                                        </div>
+                                        </div>
+                                    {% endfor %}
+
+                                {% include 'layouts/paginator.html' %}
                             </ul>
-                            <h4>{% trans 'Leave a reply' %}Leave a reply</h4>
+                            <h4>{% trans 'Leave a reply' %}</h4>
                             {% if request.user.is_authenticated %}
                                 <form action="#" method="post" class="comment-form">
                                     <div class="row">

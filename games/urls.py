@@ -9,5 +9,5 @@ urlpatterns = [
     path('games/detail/<int:pk>/', GameDetail, name='detail'),
     path('games/trailer/', VideoListView.as_view(), name='trailer'),
     path('add_cart/<int:id>/', update_cart_view, name='add'),
-
+    path('like_dislike/<int:pk>/', like_dislike, name='like_dislike'),
 ]

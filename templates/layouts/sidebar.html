@@ -3,7 +3,7 @@
                     <div class="sidebar-area mt-sm-60 mt-xs-50">
                         <!--Single Sidebar Widget Start-->
                         <div class="single-sidebar-widget mb-45">
-                            <h3>{% trans 'featured games' %}</h3>
+                            <h3>{% trans 'New games' %}</h3>
                             {% for game in games %}
                             <div class="single-featured-game mb-20">
                                 <div class="game-img">
@@ -31,24 +31,19 @@
                         <!--Single Sidebar Widget Start-->
                         <div class="single-sidebar-widget mb-45">
                             <h3>{% trans 'popular/recomended' %}</h3>
+                            {% for pop in popular %}
                             <div class="popular-game mb-20">
                                 <div class="game-img">
-                                    <a href="#"><img src="assets/images/banner/sidebar-banner3.jpg" alt=""></a>
+                                    <a href="{% url 'games:detail' pop.pk %}"><img src="{{ pop.poster.url }}" alt=""></a>
                                 </div>
                                 <div class="game-content">
-                                    <h3><a href="#">Splinter cell</a></h3>
-                                    <span>pc/xbox/ps4</span>
+                                    <h3><a href="{% url 'games:detail' pop.pk %}">{{ pop.title }}</a></h3>
+                                    {% for platform in pop.platform.values %}
+                                    <span>{{ platform.name }}</span>
+                                        {% endfor %}
                                 </div>
                             </div>
-                            <div class="popular-game mb-20">
-                                <div class="game-img">
-                                    <a href="#"><img src="assets/images/banner/sidebar-banner4.jpg" alt=""></a>
-                                </div>
-                                <div class="game-content">
-                                    <h3><a href="#">battle field 4</a></h3>
-                                    <span>pc/xbox/ps4</span>
-                                </div>
-                            </div>
+                            {% endfor %}
                         </div>
                         <!--Single Sidebar Widget End-->
                         <!--Single Sidebar Widget Start-->
@@ -74,7 +69,7 @@
                         <!--Single Sidebar Widget Start-->
                         <div class="single-sidebar-widget mb-45">
                             <div class="sidebar-banner">
-                                <a href="#"><img src="assets/images/banner/banner2.jpg" alt=""></a>
+                                <img src="{% static 'images/banner/banner2.jpg' %}" alt="">
                             </div>
                         </div>
                         <!--Single Sidebar Widget End-->

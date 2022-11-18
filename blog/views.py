@@ -9,6 +9,7 @@ from .forms import CreateBlogForm
 from users.models import CommentModel, UserModel
 from django.contrib.auth.decorators import login_required
 from users.forms import CommentForm
+from django.core.paginator import Paginator
 
 class BlogListView(ListView):
     template_name = 'blog-list.html'
@@ -65,7 +66,11 @@ def blogdetail(request, pk):
     blogs = BlogModel.objects.order_by('-pk')[:4]
     category = GameCategoryModel.objects.all()
     blog_categories = CategoryModel.objects.all()
-    comment = CommentModel.objects.filter(post=pk)
+    popular = GameModel.objects.order_by('average_rating')
+    comment = CommentModel.objects.filter(post=pk).order_by('-id')
+    paginator = Paginator(comment, 1)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     user = request.user
     if request.method == "POST":
         form = CommentForm(request.POST)
@@ -80,11 +85,12 @@ def blogdetail(request, pk):
         form = CommentForm()
     return render(request, "blog-detail.html",
                 {  "post": post,
-                   "comment": comment,
+                   "page_obj": page_obj,
                    "form": form,
                    'games': games,
                    'blogs': blogs,
                    'categories': category,
                    'blog_categories': blog_categories,
-                   'user': user
+                   'popular': popular,
+                   'user': user,
                 })

@@ -20,9 +20,6 @@
                 <div class="col-lg-6 col-12 order-md-3 order-lg-2 d-flex justify-content-center">
                     <nav class="main-menu menu-style-2">
                         <ul>
-                        {% if request.user.is_authenticated %}
-                            <li class="cardbalance">{{ request.user.card.balance }}$</li>
-                        {% endif %}
                             <li><a href="{% url 'games:list' %}">{% trans 'games' %}</a>
                                 <ul class="sub-menu">
                                     {% for category in categories %}
@@ -42,35 +39,41 @@
                                     {% endfor %}
                                 </ul>
                             </li>
-                        {% if request.user.is_authenticated %}
-                        <li><a href="{% url 'order:checkout' %}">{% trans 'Checkout' %}</a>
+                            {% if request.user.is_authenticated %}
+                                <li><a href="{% url 'order:checkout' %}">{% trans 'Checkout' %}</a>
                             {% endif %}
-                        {% get_current_language as lang %}
+                                                    <li><a href="{% url 'games:list' %}">{% trans 'profile' %}</a>
+                                <ul class="sub-menu">
+                                    <li>
+                                            balance{{ request.user.card.balance }} $
+                                    </li>
+                                    <li><a href="{% url 'order:profile' %}">{{ user.username }}</a></li>
+                                    <li><a href="{% url 'blog:create' %}">{% trans 'Blog create' %}</a></li>
+                                </ul>
+                            </li>
+                            </li>
+                            {% get_current_language as lang %}
                             <li class="lang"> {{ lang }}
                                 {% get_available_languages as LANGUAGE %}
                                 <ul class="sub-menu">
                                     {% for l in LANGUAGE %}
                                         {% if l.0 != lang %}
-                                    <li><a href="/{{ l.0 }}/{{ request.path|slice:"4:" }}">{{ l.1 }}</a></li>
+                                            <li><a href="/{{ l.0 }}/{{ request.path|slice:"4:" }}">{{ l.1 }}</a></li>
                                         {% endif %}
                                     {% endfor %}
                                 </ul>
-                            </li>
+
                         </ul>
                     </nav>
                 </div>
                 <!--Menu end-->
-
 
                 <!--Header Right Wrap-->
                 <div class="col-12 col-md-9 order-md-2 order-lg-3 col-lg-3">
                     <div class="header-right-wrap">
                         <ul>
                             {% if request.user.is_authenticated %}
-                                <li><a href="{% url 'order:profile' %}">{{ user.username }}</a></li>
-                                <li><a href="{% url 'blog:create' %}">{% trans 'Blog create' %}</a></li>
                                 <li><a href="{% url 'users:logout' %}">{% trans 'logout' %}</a></li>
-
                             {% else %}
                                 <li><a href="{% url 'users:login' %}">{% trans 'login' %}</a></li>
                                 <li><a href="{% url 'users:register' %}">{% trans 'register' %}</a></li>

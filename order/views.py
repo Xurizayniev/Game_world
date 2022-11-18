@@ -1,11 +1,9 @@
 from django.shortcuts import render, redirect, reverse
-from django.views.generic import *
 from games.models import GameModel, GameCategoryModel
 from .forms import OrderForm
 from django.db.models import Sum
 from django.contrib.auth.decorators import login_required
 from blog.models import CategoryModel
-from users.models import CardModel
 @login_required()
 def checkoutview(request):
     session = request.session.get('cart', [])
