@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-03 21:59+0000\n"
+"POT-Creation-Date: 2022-11-23 19:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,81 +17,82 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-#: config/settings.py:131
-msgid "en"
-msgstr ""
 
-#: config/settings.py:132
-msgid "ru"
-msgstr ""
-
-#: config/settings.py:133
-msgid "uz"
-msgstr ""
-
-#: games/models.py:9 games/models.py:21 games/models.py:33 games/models.py:66
+#: games/models.py:9 games/models.py:21 games/models.py:33 games/models.py:58
 msgid "created_at"
-msgstr ""
+msgstr "yaratilgan sana"
 
 #: games/models.py:20 games/models.py:32
 msgid "name"
-msgstr ""
+msgstr "nom"
+
+#: games/models.py:45
+msgid "title"
+msgstr "Nom"
+
+#: games/models.py:47
+msgid "poster"
+msgstr "plakat"
+
+#: games/models.py:48 games/models.py:49 games/models.py:50 games/models.py:51
+msgid "image body"
+msgstr "plakat"
 
 #: games/models.py:53
-msgid "title"
-msgstr ""
+msgid "company"
+msgstr "kompaniya"
+
+#: games/models.py:54
+msgid "category"
+msgstr "toifa"
 
 #: games/models.py:55
-msgid "poster"
-msgstr ""
-
-#: games/models.py:56 games/models.py:57 games/models.py:58 games/models.py:59
-msgid "image body"
-msgstr ""
-
-#: games/models.py:61
-msgid "company"
-msgstr ""
-
-#: games/models.py:62
-msgid "category"
-msgstr ""
-
-#: games/models.py:63
 msgid "platform"
-msgstr ""
+msgstr "quririlma"
+
+#: games/models.py:56
+msgid "Average rating"
+msgstr "Umumiy baho"
+
+#: games/models.py:90
+msgid "like"
+msgstr "ajoyib"
+
+#: games/models.py:91
+msgid "dislike"
+msgstr "Yoqtirmaslik"
 
 #: templates/blog-create.html:23
 msgid "Create post"
-msgstr ""
+msgstr "Yangilik qo'shish"
 
 #: templates/blog-detail.html:37
 msgid "Tags:"
-msgstr ""
+msgstr "Teglar"
 
-#: templates/blog-detail.html:48
+#: templates/blog-detail.html:49
 msgid "Comments"
-msgstr ""
-
-#: templates/blog-detail.html:58
-msgid "Reply"
-msgstr ""
+msgstr "Izohlar"
 
 #: templates/blog-detail.html:65
 msgid "Leave a reply"
-msgstr ""
+msgstr "Izoh qoldiring"
 
 #: templates/blog-detail.html:77
 msgid "Please sign up before you add comment"
-msgstr ""
+msgstr "izoh yozishdan avval ro'yxatdan o'ting"
 
-#: templates/checkout.html:128
+#: templates/checkout.html:116
+msgid "Cart Total"
+msgstr "Barcha chiqmlar"
+
+#: templates/checkout.html:118
 msgid "Games"
-msgstr ""
+msgstr "O'yinlar"
 
-#: templates/checkout.html:128
+#: templates/checkout.html:118
 msgid "Total"
-msgstr ""
+msgstr "Umumiy"
 
 #: templates/game-detail.html:54
 msgid "compitable for"
@@ -99,124 +100,178 @@ msgstr ""
 
 #: templates/game-detail.html:60
 msgid "PRICE AND DOWNLOAD"
-msgstr ""
+msgstr "Narx va sotib olmoq"
 
-#: templates/game-detail.html:66
+#: templates/game-detail.html:64
+msgid "you already bought this game"
+msgstr "Siz ushbu o'yinni allaqachon sotib olgansiz"
+
+#: templates/game-detail.html:69
 msgid "Remove from Cart"
-msgstr ""
+msgstr "Savatdan o'chirish"
 
-#: templates/game-detail.html:68
+#: templates/game-detail.html:71
 msgid "Add to Cart"
-msgstr ""
+msgstr "Savatga qo'shish"
 
-#: templates/game-detail.html:72
-msgid "Go to the system to buy"
-msgstr ""
-
-#: templates/game-detail.html:81
+#: templates/game-detail.html:85
 msgid "ratings"
+msgstr "Baholar"
+
+#: templates/game-detail.html:270
+msgid "Write Your Review"
+msgstr "baho qo'ying"
+
+#: templates/game-detail.html:272
+msgid "how do you game?"
+msgstr "O'yin haqida fikringiz"
+
+#: templates/game-detail.html:299
+msgid "subject:"
 msgstr ""
 
-#: templates/games.html:19 templates/video.html:33
-msgid "search games"
-msgstr ""
+#: templates/game-detail.html:302
+msgid "review:"
+msgstr "baho:"
+
+#: templates/game-detail.html:305
+msgid "ADD RATING "
+msgstr "Baholash"
+
+#: templates/game-detail.html:309
+msgid "Please sign up before you add rating"
+msgstr "Baho qo'yish uchun saytga kiring"
 
 #: templates/index.html:19
 msgid "Buy now"
 msgstr ""
 
-#: templates/index.html:39
+#: templates/index.html:37
 msgid "FEATURED GAMES"
-msgstr ""
+msgstr "OMMABOP O'YINLAR"
 
-#: templates/index.html:40
+#: templates/index.html:38
 msgid "VIEW ALL GAMES"
-msgstr ""
+msgstr "Barcha o'yinlarni ko'rish"
 
-#: templates/index.html:68
+#: templates/index.html:65
 msgid "new"
-msgstr ""
+msgstr "Yangi"
 
-#: templates/index.html:68 templates/layouts/navbar.html:24
+#: templates/index.html:65 templates/layouts/footer.html:29
+#: templates/layouts/navbar.html:23 templates/profile.html:31
 msgid "games"
-msgstr ""
+msgstr "o'yinlar"
 
-#: templates/index.html:108
+#: templates/index.html:105
 msgid "view demo"
-msgstr ""
+msgstr "Videoni ko'rish"
 
-#: templates/layouts/navbar.html:33
+#: templates/index.html:124
+msgid "review"
+msgstr "Baho"
+
+#: templates/index.html:137
+msgid "rating:"
+msgstr "baho:"
+
+#: templates/layouts/footer.html:30 templates/layouts/navbar.html:32
 msgid "trailer"
-msgstr ""
+msgstr "Video"
 
-#: templates/layouts/navbar.html:34
+#: templates/layouts/footer.html:31 templates/layouts/navbar.html:33
 msgid "news"
-msgstr ""
+msgstr "Yangiliklar"
 
-#: templates/layouts/navbar.html:66
+#: templates/layouts/footer.html:63 templates/layouts/sidebar.html:20
+#: templates/layouts/sidebar.html:78
+msgid "follow us"
+msgstr "Bizga obuna bo'ling"
+
+#: templates/layouts/navbar.html:44
+msgid "Checkout"
+msgstr "To'lash"
+
+#: templates/layouts/navbar.html:46
+msgid "profile"
+msgstr "Shaxsiy sahifa"
+
+#: templates/layouts/navbar.html:52
 msgid "Blog create"
+msgstr "Yangilik qo'shish"
+
+#: templates/layouts/navbar.html:56
+msgid "Picture"
 msgstr ""
 
-#: templates/layouts/navbar.html:67
+#: templates/layouts/navbar.html:68
 msgid "logout"
-msgstr ""
+msgstr "chiqish"
 
 #: templates/layouts/navbar.html:70
 msgid "login"
-msgstr ""
+msgstr "kirish"
 
 #: templates/layouts/navbar.html:71
 msgid "register"
-msgstr ""
+msgstr "Ro'yxatdan o'tish"
 
 #: templates/layouts/sidebar.html:6
-msgid "featured games"
-msgstr ""
-
-#: templates/layouts/sidebar.html:20 templates/layouts/sidebar.html:83
-msgid "follow us"
-msgstr ""
+msgid "New games"
+msgstr "Yangi o'yinlar"
 
 #: templates/layouts/sidebar.html:33
 msgid "popular/recomended"
-msgstr ""
+msgstr "Ommabop"
 
-#: templates/layouts/sidebar.html:56
+#: templates/layouts/sidebar.html:51
 msgid "recent post"
-msgstr ""
+msgstr "Oxirgi yangiliklar"
 
-#: templates/layouts/toolbar.html:5
+#: templates/layouts/toolbar.html:7 templates/video.html:33
+msgid "search games"
+msgstr "Qidirish"
+
+#: templates/layouts/toolbar.html:16
 msgid "Platform"
-msgstr ""
+msgstr "Qurilma"
 
-#: templates/layouts/toolbar.html:14
+#: templates/layouts/toolbar.html:25
 msgid "Category"
-msgstr ""
+msgstr "toifa"
 
-#: templates/login.html:22
+#: templates/login.html:28
 msgid "Login to your account"
-msgstr ""
+msgstr "Akkauntga kirish"
 
-#: templates/login.html:23 templates/register.html:36
+#: templates/login.html:29 templates/register.html:21
 msgid "Go to the system to buy games, add comment add comments to a post"
-msgstr ""
+msgstr "O'yin sotib olish, yangiliklarga izoh qoldirish hamda o'yinlarni baholash uchun ro'yxtadan o'ting"
 
-#: templates/login.html:41
+#: templates/login.html:47
 msgid "Don’t have account? please click"
-msgstr ""
+msgstr "Akkauntingiz yo'qmi? bu yerni bosing"
 
-#: templates/login.html:56
+#: templates/login.html:63 templates/register.html:45
 msgid "Also you can login with..."
-msgstr ""
+msgstr "Shuningdek, siz facebook, instagram va google yordamida kirishingiz mumkin."
 
-#: templates/register.html:17
-msgid "Login"
-msgstr ""
+#: templates/profile.html:26
+msgid "user"
+msgstr "foydalanuvchi"
 
-#: templates/register.html:35
+#: templates/profile.html:28
+msgid "balance"
+msgstr "hisobingiz"
+
+#: templates/register.html:20
 msgid "We will need for your registration"
 msgstr ""
 
+#: templates/register.html:31
+msgid "Login"
+msgstr "Kirish"
+
 #: templates/video.html:16
 msgid "Video"
-msgstr ""
+msgstr "Video"

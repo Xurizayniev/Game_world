@@ -5345,18 +5345,8 @@ header.header.header-static {
     display: flex;
 }
 
-.cardbalance {
-    font-size: 20px;
-    line-height: 70px;
-    font-weight: 400;
-    letter-spacing: 0.25px;
-    font-family: "Qanto";
-    color: #ffffff;
-    display: block;
-    padding: 30px 0;
-    position: relative;
-    text-transform: capitalize;
-    padding-top: 10px !important;
+.klass {
+  background-color: white !important;
 }
 
 /* Hide Radio button */

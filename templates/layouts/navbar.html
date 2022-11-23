@@ -23,9 +23,9 @@
                             <li><a href="{% url 'games:list' %}">{% trans 'games' %}</a>
                                 <ul class="sub-menu">
                                     {% for category in categories %}
-                                        <li>
-                                            <a href="{% url 'games:list' %}?category={{ category.name }}">{{ category.name }}</a>
-                                        </li>
+                                    <li>
+                                        <a href="{% url 'games:list' %}?category={{ category.name }}">{{ category.name}}</a>
+                                    </li>
                                     {% endfor %}
                                 </ul>
                             </li>
@@ -33,36 +33,28 @@
                             <li><a href="{% url 'blog:news' %}">{% trans 'news' %}</a>
                                 <ul class="sub-menu">
                                     {% for blog_category in blog_categories %}
-                                        <li>
-                                            <a href="{% url 'blog:news' %}?category={{ blog_category.name }}">{{ blog_category.name }}</a>
-                                        </li>
+                                    <li>
+                                        <a href="{% url 'blog:news' %}?category={{ blog_category.name }}">{{blog_category.name }}</a>
+                                    </li>
                                     {% endfor %}
                                 </ul>
                             </li>
                             {% if request.user.is_authenticated %}
-                                <li><a href="{% url 'order:checkout' %}">{% trans 'Checkout' %}</a>
+                                {% if request.session.cart|length > 0 %}
+                            <li><a href="{% url 'users:checkout' %}">{% trans 'Checkout' %}</a>
+                                    {% endif %}
+                            <li><a href="{% url 'users:profile' %}">{% trans 'profile' %}</a>
                             {% endif %}
-                                                    <li><a href="{% url 'games:list' %}">{% trans 'profile' %}</a>
                                 <ul class="sub-menu">
                                     <li>
-                                            balance{{ request.user.card.balance }} $
+                                        balance{{ request.user.card.balance }} $
                                     </li>
-                                    <li><a href="{% url 'order:profile' %}">{{ user.username }}</a></li>
                                     <li><a href="{% url 'blog:create' %}">{% trans 'Blog create' %}</a></li>
                                 </ul>
                             </li>
+                            <li>
+                                <a href="#">{% trans 'Picture' %}</a>
                             </li>
-                            {% get_current_language as lang %}
-                            <li class="lang"> {{ lang }}
-                                {% get_available_languages as LANGUAGE %}
-                                <ul class="sub-menu">
-                                    {% for l in LANGUAGE %}
-                                        {% if l.0 != lang %}
-                                            <li><a href="/{{ l.0 }}/{{ request.path|slice:"4:" }}">{{ l.1 }}</a></li>
-                                        {% endif %}
-                                    {% endfor %}
-                                </ul>
-
                         </ul>
                     </nav>
                 </div>
@@ -73,18 +65,16 @@
                     <div class="header-right-wrap">
                         <ul>
                             {% if request.user.is_authenticated %}
-                                <li><a href="{% url 'users:logout' %}">{% trans 'logout' %}</a></li>
+                            <li><a href="{% url 'users:logout' %}">{% trans 'logout' %}</a></li>
                             {% else %}
-                                <li><a href="{% url 'users:login' %}">{% trans 'login' %}</a></li>
-                                <li><a href="{% url 'users:register' %}">{% trans 'register' %}</a></li>
+                            <li><a href="{% url 'users:login' %}">{% trans 'login' %}</a></li>
+                            <li><a href="{% url 'users:register' %}">{% trans 'register' %}</a></li>
                             {% endif %}
                         </ul>
                     </div>
                 </div>
                 <!--Header Right Wrap-->
-
             </div>
-
             <!--Mobile Menu start-->
             <div class="row">
                 <div class="col-12 d-flex d-lg-none">
@@ -92,9 +82,7 @@
                 </div>
             </div>
             <!--Mobile Menu end-->
-
         </div>
     </div>
 </header>
 <!--Header section end-->
-    

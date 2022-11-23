@@ -1,10 +1,11 @@
-import django.utils.functional
+from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import GameCategoryModel, GameModel, PlatformModel, RatingModel
 from blog.models import BlogModel,  CategoryModel
 from django.views.generic import TemplateView, ListView
-from django.db.models import Sum
+
+
 class HomePageView(TemplateView):
 
     template_name = 'index.html'
@@ -20,6 +21,7 @@ class HomePageView(TemplateView):
         data['platforms'] = PlatformModel.objects.all()
         data['blog_categories'] = CategoryModel.objects.all()
         data['user'] = self.request.user
+        data['rating'] = RatingModel.objects.all().order_by('pk')[:3]
         return data
 
 class GameListView(ListView):
@@ -53,7 +55,10 @@ class GameListView(ListView):
 
 def GameDetail(request, pk, **kwargs):
     object = GameModel.objects.get(pk=pk)
-    all_ratings = RatingModel.objects.filter(game_id=pk)
+    all_ratings = RatingModel.objects.filter(game_id=pk).order_by('-id')
+    paginator = Paginator(all_ratings, 1)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     all_rate_count = RatingModel.objects.filter(game_id=pk).count()
     if len(all_ratings) != 0:
         all_rate = sum([all_rate.rating for all_rate in all_ratings])
@@ -72,7 +77,6 @@ def GameDetail(request, pk, **kwargs):
         print(request.POST)
         if request.POST['subject']:
             data, ob = RatingModel.objects.get_or_create(user=user, game_id=pk)
-            print(data.user)
             data.subject = request.POST.get('subject')
             data.comment = request.POST.get('comment')
             data.rating = request.POST.get('rating')
@@ -83,6 +87,7 @@ def GameDetail(request, pk, **kwargs):
         games = user.games.all()
         return render(request, 'game-detail.html', context={
             'object': object,
+            'page_obj': page_obj,
             'games': game,
             'blogs': blogs,
             'categories': category,
@@ -95,6 +100,7 @@ def GameDetail(request, pk, **kwargs):
     else:
         return render(request, 'game-detail.html', context={
             'object': object,
+            'page_obj': page_obj,
             'games': game,
             'blogs': blogs,
             'categories': category,

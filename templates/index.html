@@ -1,5 +1,5 @@
 {% extends 'layouts/base.html' %}
-{% load static i18n %}
+{% load static i18n  my_tags %}
 {% block title %} home {% endblock %}
 {% block content %}
 
@@ -16,7 +16,7 @@
                                 <!--Hero Content start-->
                                 <div class="hero-content">
                                     <h1>{{ game.title }}</h1>
-                                    <a class="df-btn" href="#">{% trans 'Buy now' %}</a>
+                                    <a class="df-btn" href="{% url 'games:detail' game.pk %}">{% trans 'go to page' %}</a>
                                 </div>
                                 <!--Hero Content end-->
                             </div>
@@ -121,90 +121,31 @@
                 <div class="col-12">
                     <!--Section Title Start-->
                     <div class="section-title">
-                        <h2><span class="color-blue">Games</span> review</h2>
+                        <h2>{% trans 'review' %}</h2>
                     </div>
                     <!--Section Title End-->
                 </div>
             </div>
+
             <div class="row">
+                {% for review in rating %}
                 <div class="col-lg-4 col-md-6">
                     <!--Single Games Review Start-->
                     <div class="single-games-review mb-50">
-                        <div class="review-img">
-                            <a href="games-details.html"><img src="assets/images/review/review1.jpg" alt=""></a>
-                        </div>
                         <div class="review-content">
-                            <h4><a href="games-details.html">the elder scroll</a></h4>
-                            <span>rating: 9.9</span>
-                            <p>The Elder Scroll is the most popular are ames that your can Latest Mega 2019 games offer
-                                you ioous league and also alow you to make youe and smile</p>
+                            <h4><a href="games-details.html">{{ review.comment }}</a></h4>
+                            <span>{% trans 'rating:' %}: {{ review.rating }}</span>
+                            <p>{{ review.subject }}</p>
                         </div>
                     </div>
                     <!--Single Games Review End-->
                 </div>
-                <div class="col-lg-4 col-md-6">
-                    <!--Single Games Review Start-->
-                    <div class="single-games-review mb-50">
-                        <div class="review-img">
-                            <a href="games-details.html"><img src="assets/images/review/review2.jpg" alt=""></a>
-                        </div>
-                        <div class="review-content">
-                            <h4><a href="games-details.html">the elder scroll</a></h4>
-                            <span>rating: 9.9</span>
-                            <p>The Elder Scroll is the most popular are ames that your can Latest Mega 2019 games offer
-                                you ioous league and also alow you to make youe and smile</p>
-                        </div>
-                    </div>
-                    <!--Single Revent Games End-->
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <!--Single Games Review Start-->
-                    <div class="single-games-review mb-50">
-                        <div class="review-img">
-                            <a href="games-details.html"><img src="assets/images/review/review3.jpg" alt=""></a>
-                        </div>
-                        <div class="review-content">
-                            <h4><a href="games-details.html">the elder scroll</a></h4>
-                            <span>rating: 9.9</span>
-                            <p>The Elder Scroll is the most popular are ames that your can Latest Mega 2019 games offer
-                                you ioous league and also alow you to make youe and smile</p>
-                        </div>
-                    </div>
-                    <!--Single Games Review End-->
-                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
     <!--Games Review Section Start-->
 
-    <!--Projects section start-->
-    <div class="newslatter-section section pb-125 pb-lg-105 pb-md-70 pb-sm-85 pb-xs-50">
-        <div class="container">
-
-            <div class="row">
-                <div class="col-12">
-                    <!--News Latter Area Start-->
-                    <div class="news-latter-area">
-                        <div class="news-latter-box">
-                            <h3>SUBSCRIBE OUR <span class="color-blue">NEWSLETTER</span> <br> GET ALL <span
-                                    class="color-red">LATEST</span> NEWS, UPDATE, <br> <span
-                                    class="color-blue">VIDEOS</span> AND OFFERS </h3>
-                            <form action="#">
-                                <input type="text" placeholder="Enter your email here">
-                            </form>
-                        </div>
-                        <div class="news-latter-banner-image">
-                            <img src="assets/images/news-latter/news-banner.png" alt="">
-                        </div>
-                    </div>
-                    <!--News Latter Area End-->
-                </div>
-            </div>
-
-        </div>
-
-    </div>
-    <!--Projects section end-->
 
 
 {% endblock %}

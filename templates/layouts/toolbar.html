@@ -1,6 +1,16 @@
 {% load i18n %}
-<div class="game-topbar-wrapper d-md-flex justify-content-md-between align-items-center">
+
+
+{#<div class="game-topbar-wrapper d-md-flex justify-content-md-between align-items-center">#}
      <!--Toolbar Short Area Start-->
+    <div class="game-search-box">
+                        <h3>{% trans "search games" %}</h3>
+                        <form action="" method="GET">
+                            <input type="text" name="game_search" placeholder="Enter games name">
+                            <button type="submit"><i class="icofont-search-2"></i></button>
+                        </form>
+                    </div>
+
      <div class="toolbar-short-area d-md-flex align-items-center">
          <div class="toolbar-shorter">
             <h3>{% trans 'Platform' %}</h3>
@@ -22,4 +32,4 @@
          </div>
      </div>
      <!--Toolbar Short Area End-->
-</div>
+{#</div>#}

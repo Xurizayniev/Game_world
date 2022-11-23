@@ -24,13 +24,18 @@ class RegistrationForm(forms.ModelForm):
             raise ValidationError('Passwords are not the same !')
         return self.cleaned_data
 
+
     class Meta:
         model = UserModel
         fields = ['username', 'password', 'confirm_password']
 
+
+class OrderForm(forms.Form):
+    price = forms.IntegerField(label=tr('price'))
 
 class CommentForm(forms.ModelForm):
 
     class Meta:
         model = CommentModel
         fields = ['email', 'body']
+

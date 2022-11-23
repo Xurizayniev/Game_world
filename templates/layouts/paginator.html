@@ -2,6 +2,8 @@
                 <div class="col-12">
                     <div class="blog-pagination text-center">
                         <ul class="page-pagination">
+                        {% if page_obj.has_other_pages %}
+                        {% else %}
                         {% if page_obj.has_previous %}
                             <li><a {% if request.GET %}href="{{ request.get_full_path }}&page={{ page_obj.previous_page_number }}"{% else %}href="?page={{ page_obj.previous_page_number }}"{% endif %}><i class="icofont-long-arrow-left"></i></a></li>
                         {% endif %}
@@ -16,6 +18,7 @@
                         {% if page_obj.has_next %}
 
                             <li><a {% if request.GET %}href="{{ request.get_full_path }}&page={{ page_obj.next_page_number }}"{% else %}href="?page={{ page_obj.next_page_number }}"{% endif %}><i class="icofont-long-arrow-right"></i></a></li>
+                        {% endif %}
                         {% endif %}
                         </ul>
                     </div>

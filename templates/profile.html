@@ -1,62 +1,93 @@
 {% extends 'layouts/base.html' %}
 {% load static i18n %}
 {% block title %} PROFILE GAME {% endblock %}
+
+
 {% block content %}
 
     <!--Page Banner Area Start-->
     {% include 'layouts/banner.html' %}
     <!--Page Banner Area End-->
 
-        <!--Games Area Start-->
+
+
+
+    <!--Games Area Start-->
     <div class="games-area section pt-85 pt-lg-65 pt-md-55 pt-sm-55 pt-xs-45">
         <div class="container">
             <div class="row">
                 <div class="col-12">
                     <!--Game Toolbar Start-->
                     <div class="game-topbar-wrapper d-md-flex justify-content-md-between align-items-center">
-                        <div class="game-search-box">
-                            <h3>{% trans "search games" %}search games</h3>
-                            <form action="{% url 'games:list' %}", method="GET">
-                                <input type="text" name="game_search" placeholder="Enter games name">
-                                <button type="submit"><i class="icofont-search-2"></i></button>
-                            </form>
+                        <div class="col-lg-5">
+                            <div class="row">
+                                <!-- Cart Total -->
+                                <div class="checkout-cart-total">
+                                    <h4>{% trans 'user' %} <span>{{ user.username }}</span></h4>
+                                    <ul>
+                                        <li><h4> {% trans 'balance' %}<span>{{ request.user.card.balance }}$</span></h4>
+                                        </li>
+                                    </ul>
+                                    <h4> {% trans 'games' %} <span>{{ games.count }}</span></h4>
+                                </div>
+                            </div>
                         </div>
-                         <!--Toolbar Short Area Start-->
-                                {% include 'layouts/toolbar.html' %}
-                         <!--Toolbar Short Area End-->
                     </div>
                     <!--Game Toolbar End-->
                 </div>
             </div>
-        <!--Single Game Start-->
+            <!--Single Game Start-->
             <div class="row">
-                 {% for game in games %}
-                <div class="col-lg-4 col-md-6">
-                    <div class="single-game mb-50">
-                        <div class="game-img">
-                            <a href="{% url 'games:detail' game.pk %}"><img src="{{ game.poster.url }}" alt=""></a>
-                        </div>
-                        <div class="game-content">
-                            <h4><a href="{% url 'games:detail'  game.pk %}">{{ game.title }}</a></h4>
-                            {% for platform in game.platform.values %}
-                            <span>{{ platform.name}}/</span>
+                {% for game in page_obj %}
+                    <div class="col-lg-4 col-md-6">
+                        <div class="single-game mb-50">
+                            <div class="game-img">
+                                <a href="{% url 'games:detail' game.pk %}"><img src="{{ game.poster.url }}" alt=""></a>
+                            </div>
+                            <div class="game-content">
+                                <h4><a href="{% url 'games:detail'  game.pk %}">{{ game.title }}</a></h4>
+                                {% for platform in game.platform.values %}
+                                    <span>{{ platform.name }}/</span>
                                 {% endfor %}
+                            </div>
                         </div>
                     </div>
-                </div>
                 {% endfor %}
             </div>
-        <!--Single Game End-->
+            <!--Single Game End-->
 
-        <!--Start Paginator-->
-        {% include 'layouts/paginator.html' %}
-        <!--End Paginator-->
+            <!--Start Paginator-->
+                <div class="row">
+                <div class="col-12">
+                    <div class="blog-pagination text-center">
+                        <ul class="page-pagination">
+{#                        {% if page_obj.has_other_pages %}#}
+{#                        {% else %}#}
+                        {% if page_obj.has_previous %}
+                            <li><a {% if request.GET %}href="{{ request.get_full_path }}&page={{ page_obj.previous_page_number }}"{% else %}href="?page={{ page_obj.previous_page_number }}"{% endif %}><i class="icofont-long-arrow-left"></i></a></li>
+                        {% endif %}
+                                {% for page in page_obj.paginator.page_range %}
+                                    {% if page_obj.number == page %}
+                                    <li><a class="{% if page == page_obj.number %}paginat text-primary{% endif %}" {% if request.GET %}href="{{ request.get_full_path }}&page={{ page }}"{% else %}href="?page={{ page }}"{% endif %}>{{ page }}</a></li>
+                                    {% elif page >= page_obj.number|add:-2 and page <= page_obj.number|add:2 %}
+                                    <li><a class="{% if page == page_obj.number %}paginat text-primary{% endif %}" {% if request.GET %}href="{{ request.get_full_path }}&page={{ page }}"{% else %}href="?page={{ page }}"{% endif %}>{{ page }}</a></li>
+                                    {% endif %}
+                                    {% endfor %}
+
+                        {% if page_obj.has_next %}
+
+                            <li><a {% if request.GET %}href="{{ request.get_full_path }}&page={{ page_obj.next_page_number }}"{% else %}href="?page={{ page_obj.next_page_number }}"{% endif %}><i class="icofont-long-arrow-right"></i></a></li>
+                        {% endif %}
+{#                        {% endif %}#}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+            <!--End Paginator-->
         </div>
     </div>
     <!--Games Area End-->
-
-    <!--Projects section start-->
-        {% include 'layouts/message.html' %}
-    <!--Projects section end-->
 
 {% endblock %}

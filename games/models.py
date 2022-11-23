@@ -53,7 +53,7 @@ class GameModel(models.Model):
     company = models.ForeignKey(CompanyModel, on_delete=models.CASCADE, verbose_name=_('company'))
     category = models.ForeignKey(GameCategoryModel, on_delete=models.SET_NULL, verbose_name=_('category'), null=True)
     platform = models.ManyToManyField(PlatformModel, verbose_name=_('platform'))
-    average_rating = models.FloatField(verbose_name=_('Average rating'), default=0.0)
+    average_rating = models.FloatField(verbose_name=_('Average rating'), null=True, blank=True, default=0.0)
     price = models.DecimalField(max_digits=5, decimal_places=2)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name=_('created_at'))
 
@@ -86,7 +86,7 @@ class RatingModel(models.Model):
     game = models.ForeignKey(GameModel, on_delete=models.CASCADE, null=True, blank=True)
     subject = models.CharField(max_length=100, blank=True, null=True)
     comment = models.TextField(max_length=500, null=True, blank=True)
-    rating = models.FloatField()
+    rating = models.FloatField(null=True, blank=True)
     like = models.ManyToManyField('users.UserModel', related_name=_('like'), null=True, blank=True,)
     dislike = models.ManyToManyField('users.UserModel', related_name=_('dislike'), null=True, blank=True,)
     created_at = models.DateTimeField(auto_now_add=True)
